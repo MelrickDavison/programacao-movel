@@ -1,12 +1,16 @@
+import { useState } from 'react';
 import { StatusBar } from 'expo-status-bar';
-import { StyleSheet, Text, View } from 'react-native';
-import Gato from './Gato'
+import { StyleSheet, Text, View, Button} from 'react-native';
+
 export default function App() {
+  const [cliques, setCliques] = useState(0);
   return (
     <View style={styles.container}>
-      <Text>Open up App.js to start working on your app!</Text>
-      <Gato nome = "Black"idade = {17}/>
-      <Gato nome = "Minguau" idade = {17}/>
+      <Button title="OK" onPress={()=>{
+        setCliques(cliques + 1);
+      }}/>
+
+      <Text>Quantidade de cliques: {cliques}</Text>
       <StatusBar style="auto" />
     </View>
   );
