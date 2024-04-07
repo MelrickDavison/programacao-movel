@@ -1,12 +1,12 @@
 import { StatusBar } from 'expo-status-bar';
 import { StyleSheet, Image, Text, View, Pressable } from 'react-native';
+import { Avatar } from 'react-native-paper';
 
 export default function ButtonLogin({nome, foto}) {
   return (
     <View style={styles.button}>
     <Pressable style={styles.buttonPressable} onPress={''}>
-            <Image style={styles.imagem} source={foto}
-            />
+         <Avatar.Image size={34} source={foto} style={styles.avatar}/>
          <Text style={styles.textButton}>{nome}</Text>
     </Pressable>
     </View>
@@ -19,7 +19,7 @@ const styles = StyleSheet.create({
     alignItems: 'flex-start',
     justifyContent: 'center',
     alignContent: 'flex-start',
-    width: 300,
+    width: 250,
     height: 50,
     borderRadius: 30,
     backgroundColor: '#67209E',
@@ -31,13 +31,15 @@ const styles = StyleSheet.create({
 
   },
 
-  imagem: {
-    height: 20,
-    width: 20,
-    padding: 10,
+  avatar: {
+    backgroundColor: '#fff',
+    marginLeft: 15
   },
   textButton: {
    color: '#fff',
    fontSize: 18,
+   marginTop: 5,
+   marginLeft: 10,
+   textAlign: 'center'
   }
 });
