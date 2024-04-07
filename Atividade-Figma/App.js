@@ -1,6 +1,7 @@
 import { StatusBar } from 'expo-status-bar';
 import { StyleSheet, Text, View, Image, TextInput, SafeAreaView, Button } from 'react-native';
 import { LinearGradient } from 'expo-linear-gradient';
+import ButtonLogin from './Components/buttonLogin';
 
 export default function App() {
   return (
@@ -14,14 +15,6 @@ export default function App() {
      <Image style={styles.imgLogo}  source={require('./assets/Image/logo_Instudo.png')} />
       </View>
     
-  
-  <View >
- 
- 
-         
-
-
-  </View>
   <View style={styles.form}>
 
     <View style={styles.campForm}>
@@ -47,6 +40,15 @@ export default function App() {
   <View style={styles.submit}>
     <Button style={styles.buttonSubmit} title="Entrar" color='#9C56D3'/>
   </View>
+
+    
+  <View style={styles.loginContainer}>
+    <Text style={styles.tagLogin}>Entrar com:</Text>
+
+      <ButtonLogin nome={"Google"} foto={require('./assets/Image/google.png')}/>
+      <ButtonLogin nome={"Facebook"} foto={require('./assets/Image/facebook.png')}/>
+      <ButtonLogin nome={"Apple"} foto={require('./assets/Image/apple.png')}/>
+    </View>
 
   </SafeAreaView>
    
@@ -83,9 +85,8 @@ const styles = StyleSheet.create({
     objectFit: 'contain'
   },
   input: {
-    height: 35,
+    height: 45,
     margin: 12,
-    borderWidth: 1,
     padding: 5,
     color: '#fff',
     backgroundColor: '#67209E',
@@ -101,7 +102,7 @@ const styles = StyleSheet.create({
   form: {
     flexDirection: "column",
     maxWidth: '800px',
-   marginTop: -150,
+    marginTop: 135,
    marginRight: 30
   },
 
@@ -118,5 +119,18 @@ const styles = StyleSheet.create({
     alignSelf: 'center',
     alignContent: 'center',
     marginTop: 20,
-  }
+  },
+
+  loginContainer: {
+    marginTop:  20,
+    padding: 10,
+    justifyContent: 'center',
+    alignItems: 'center'
+  },
+
+  tagLogin: {
+    color: '#9C56D3',
+    fontSize: 20,
+
+  },
 });
