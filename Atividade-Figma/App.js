@@ -1,5 +1,4 @@
-import { StatusBar } from 'expo-status-bar';
-import { StyleSheet, Text, View, Image, TextInput, SafeAreaView, Button } from 'react-native';
+import {StatusBar, StyleSheet, Text, View, Image, TextInput, SafeAreaView, Button } from 'react-native';
 import { LinearGradient } from 'expo-linear-gradient';
 import ButtonLogin from './Components/buttonLogin';
 
@@ -7,6 +6,7 @@ export default function App() {
   return (
  
     <SafeAreaView style={styles.container}>
+      <StatusBar/>
   <LinearGradient
         colors={['#1A191A', 'transparent']}
         style={styles.background}
@@ -72,10 +72,10 @@ const styles = StyleSheet.create({
   },
   logo: {
     position: 'absolute',
-    top: 50,
-    left: 20,
+    top: 30,
     height: 150,
     width: 155,
+    marginRight: 140,
 
   },
 
@@ -84,9 +84,10 @@ const styles = StyleSheet.create({
     width: 305,
     objectFit: 'contain'
   },
+
   input: {
     height: 45,
-    margin: 12,
+    margin: 6,
     padding: 5,
     color: '#fff',
     backgroundColor: '#67209E',
@@ -101,9 +102,7 @@ const styles = StyleSheet.create({
 
   form: {
     flexDirection: "column",
-    maxWidth: '800px',
-    marginTop: 135,
-   marginRight: 30
+    marginTop: 160,
   },
 
   tagForm: {
@@ -122,7 +121,6 @@ const styles = StyleSheet.create({
   },
 
   loginContainer: {
-    marginTop:  20,
     padding: 10,
     justifyContent: 'center',
     alignItems: 'center'
