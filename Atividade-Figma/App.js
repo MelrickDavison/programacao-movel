@@ -1,5 +1,5 @@
 import { StatusBar } from 'expo-status-bar';
-import { StyleSheet, Text, View, Image, TextInput, SafeAreaView } from 'react-native';
+import { StyleSheet, Text, View, Image, TextInput, SafeAreaView, Button } from 'react-native';
 import { LinearGradient } from 'expo-linear-gradient';
 
 export default function App() {
@@ -44,6 +44,10 @@ export default function App() {
     </View>
   </View>
 
+  <View style={styles.submit}>
+    <Button style={styles.buttonSubmit} title="Entrar" color='#9C56D3'/>
+  </View>
+
   </SafeAreaView>
    
 
@@ -84,7 +88,7 @@ const styles = StyleSheet.create({
     borderWidth: 1,
     padding: 5,
     color: '#fff',
-    backgroundColor: '#9C56D3',
+    backgroundColor: '#67209E',
     borderRadius: 30,
     width: 270,
     zIndex: 1,
@@ -108,5 +112,11 @@ const styles = StyleSheet.create({
 
   campForm:{
     color: '#fff'
+  },
+
+  submit: {
+    alignSelf: 'center',
+    alignContent: 'center',
+    marginTop: 20,
   }
 });
