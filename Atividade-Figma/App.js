@@ -1,8 +1,25 @@
-import {StatusBar, StyleSheet, Text, View, Image, TextInput, SafeAreaView, Button } from 'react-native';
+import {StatusBar, StyleSheet, Text, View, Image, TextInput, SafeAreaView, Button, Pressable} from 'react-native';
 import { LinearGradient } from 'expo-linear-gradient';
 import ButtonLogin from './Components/buttonLogin';
+import { useState } from 'react';
 
 export default function App() {
+
+  const [senha, setSenha] = useState(true);
+  const [imgSenha, setImgSenha] = useState(require('./assets/Image/closeEye.png'))
+
+  function mudarImg(){
+    if(imgSenha === require('./assets/Image/closeEye.png')){
+      setImgSenha(require('./assets/Image/eye.png'))
+      setSenha(false)
+      console.log(senha)
+    }else{
+      setImgSenha(require('./assets/Image/closeEye.png'))
+      setSenha(true)
+      console.log(senha)
+    }
+  }
+
   return (
  
     <SafeAreaView style={styles.container}>
@@ -29,11 +46,19 @@ export default function App() {
 
     <View style={styles.campForm}>
         <Text style={styles.tagForm}>Senha:</Text>
+        <View  style={styles.showPass}>
+         
         <TextInput
-          style={[styles.input, styles.password]}
-          secureTextEntry={true}
+          style={styles.password}
+          secureTextEntry={senha}
           placeholder='Digite sua senha'
+          underlineColorAndroid="transparent"
         />
+         <Pressable onPress={mudarImg}>
+            <Image style={styles.imgSenha} source={imgSenha}/>
+          </Pressable>
+        </View>
+
     </View>
   </View>
 
@@ -86,19 +111,21 @@ const styles = StyleSheet.create({
   },
 
   input: {
-    height: 45,
+    height: 27,
     padding: 5,
     marginTop: 7,
     marginBottom: 15,
     color: '#fff',
     backgroundColor: '#67209E',
     borderRadius: 30,
-    width: 270,
-    zIndex: 1,
+
   },
 
   password: {
-    width: 170,
+    flex: 1, 
+    color: '#fff',
+    marginLeft: 8,
+    width: 130,
   },
 
   form: {
@@ -132,4 +159,26 @@ const styles = StyleSheet.create({
     fontSize: 20,
 
   },
+
+  showPass:{
+    flex: 1,
+    justifyContent: 'center',
+    alignItems: 'center',
+    flexDirection: 'row',
+    backgroundColor: '#67209E',
+    borderRadius: 30,
+    width: 270,
+    zIndex: 1,
+    color: '#fff',
+    marginTop: 7,
+    marginBottom: 15,
+  },
+  imgSenha: {
+    padding: 10,
+    height: 25,
+    width: 25,
+    marginRight: 10,
+    resizeMode: 'stretch',
+    alignItems: 'center',
+  }
 });
