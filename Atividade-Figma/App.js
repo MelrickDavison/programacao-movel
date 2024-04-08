@@ -40,6 +40,7 @@ export default function App() {
             style={styles.input}
             selectTextOnFocus= {true}
             placeholder='Digite seu login'
+            placeholderTextColor={"#fff"}
             selectionColor={'#fff'}
           />
     </View>
@@ -52,6 +53,7 @@ export default function App() {
           style={styles.password}
           secureTextEntry={senha}
           placeholder='Digite sua senha'
+          placeholderTextColor={"#fff"}
           underlineColorAndroid="transparent"
         />
          <Pressable onPress={mudarImg}>
@@ -96,8 +98,6 @@ const styles = StyleSheet.create({
     height: 4500,
   },
   logo: {
-    position: 'relative',
-    marginTop: -170,
     height: 150,
     width: 155,
     right: 90
@@ -177,7 +177,7 @@ const styles = StyleSheet.create({
     padding: 10,
     height: 25,
     width: 25,
-    marginRight: 10,
+    margin: 10,
     resizeMode: 'stretch',
     alignItems: 'center',
   },
