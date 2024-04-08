@@ -100,7 +100,7 @@ const styles = StyleSheet.create({
   logo: {
     height: 150,
     width: 155,
-    right: 90
+    right: 90,
   },
 
   imgLogo: {
@@ -156,7 +156,7 @@ const styles = StyleSheet.create({
 
   tagLogin: {
     color: '#fff',
-    fontSize: 20,
+    fontSize: 17,
 
   },
 
