@@ -58,7 +58,7 @@ export default function App() {
             <Image style={styles.imgSenha} source={imgSenha}/>
           </Pressable>
         </View>
-
+    <Text style={styles.forgetPass}>Esqueceu a Senha?</Text>
     </View>
   </View>
 
@@ -96,12 +96,11 @@ const styles = StyleSheet.create({
     height: 4500,
   },
   logo: {
-    position: 'absolute',
-    top: 30,
+    position: 'relative',
+    marginTop: -170,
     height: 150,
     width: 155,
-    marginRight: 140,
-
+    right: 90
   },
 
   imgLogo: {
@@ -130,7 +129,7 @@ const styles = StyleSheet.create({
 
   form: {
     flexDirection: "column",
-    marginTop: 160,
+    
   },
 
   tagForm: {
@@ -139,7 +138,7 @@ const styles = StyleSheet.create({
   },
 
   campForm:{
-    color: '#fff'
+    color: '#fff',
   },
 
   submit: {
@@ -151,23 +150,24 @@ const styles = StyleSheet.create({
   loginContainer: {
     padding: 10,
     justifyContent: 'center',
-    alignItems: 'center'
+    alignItems: 'center',
+    justifyContent: 'center'
   },
 
   tagLogin: {
-    color: '#9C56D3',
+    color: '#fff',
     fontSize: 20,
 
   },
 
   showPass:{
-    flex: 1,
     justifyContent: 'center',
     alignItems: 'center',
     flexDirection: 'row',
     backgroundColor: '#67209E',
     borderRadius: 30,
     width: 270,
+    height: 27,
     zIndex: 1,
     color: '#fff',
     marginTop: 7,
@@ -180,5 +180,12 @@ const styles = StyleSheet.create({
     marginRight: 10,
     resizeMode: 'stretch',
     alignItems: 'center',
+  },
+  forgetPass:{
+    color: "#fff",
+    marginTop: -10,
+    marginLeft: 10,
+    fontWeight: 'bold',
+    textDecorationLine: 'underline'
   }
 });

@@ -37,9 +37,8 @@ const styles = StyleSheet.create({
   },
   textButton: {
    color: '#fff',
-   fontSize: 18,
-   marginTop: 5,
-   marginLeft: 10,
-   textAlign: 'center'
+   fontSize: 15,
+   margin: 5,
+   width: 250,
   }
 });
