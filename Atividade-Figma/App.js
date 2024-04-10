@@ -85,10 +85,7 @@ export default function App() {
 
 const styles = StyleSheet.create({
   container: {
-    flex: 1,
     backgroundColor: '#9C56D3',
-    alignItems: 'center',
-    justifyContent: 'center',
   },
   background: {
     position: 'absolute',
@@ -121,14 +118,12 @@ const styles = StyleSheet.create({
   },
 
   password: {
-    flex: 1, 
     color: '#fff',
     marginLeft: 8,
     width: 130,
   },
 
   form: {
-    flexDirection: "column",
     
   },
 
@@ -142,16 +137,11 @@ const styles = StyleSheet.create({
   },
 
   submit: {
-    alignSelf: 'center',
-    alignContent: 'center',
     marginTop: 20,
   },
 
   loginContainer: {
     padding: 10,
-    justifyContent: 'center',
-    alignItems: 'center',
-    justifyContent: 'center'
   },
 
   tagLogin: {
@@ -161,9 +151,6 @@ const styles = StyleSheet.create({
   },
 
   showPass:{
-    justifyContent: 'center',
-    alignItems: 'center',
-    flexDirection: 'row',
     backgroundColor: '#67209E',
     borderRadius: 30,
     width: 270,
