@@ -70,7 +70,10 @@ export default function App() {
 
     
   <View style={styles.loginContainer}>
+    <View style={styles.lableLogin}>
     <Text style={styles.tagLogin}>Entrar com:</Text>
+    </View>
+   
 
       <ButtonLogin nome={"Google"} foto={require('./assets/Image/google.png')}/>
       <ButtonLogin nome={"Facebook"} foto={require('./assets/Image/facebook.png')}/>
@@ -85,7 +88,9 @@ export default function App() {
 
 const styles = StyleSheet.create({
   container: {
+    flex: 1,
     backgroundColor: '#9C56D3',
+    
   },
   background: {
     position: 'absolute',
@@ -95,9 +100,12 @@ const styles = StyleSheet.create({
     height: 4500,
   },
   logo: {
+    flex: 3,
     height: 150,
     width: 155,
-    right: 90,
+    justifyContent: 'flex-start',
+    alignItems: 'flex-end',
+    flexDirection: 'row'
   },
 
   imgLogo: {
@@ -108,9 +116,8 @@ const styles = StyleSheet.create({
 
   input: {
     height: 27,
+    width: 270,
     padding: 5,
-    marginTop: 7,
-    marginBottom: 15,
     color: '#fff',
     backgroundColor: '#67209E',
     borderRadius: 30,
@@ -121,10 +128,16 @@ const styles = StyleSheet.create({
     color: '#fff',
     marginLeft: 8,
     width: 130,
+    flexDirection: 'row',
+    flex: 1,
   },
 
   form: {
-    
+    flex: 2,
+    padding: 20,
+    justifyContent: 'flex-start',
+    alignItems: 'flex-start',
+    flexDirection: 'column'
   },
 
   tagForm: {
@@ -137,42 +150,48 @@ const styles = StyleSheet.create({
   },
 
   submit: {
-    marginTop: 20,
+    flex: 1,
+    justifyContent: 'center',
+    alignItems: 'center',
+    flexDirection:'column'
   },
 
   loginContainer: {
+    flex: 5,
+    justifyContent: 'flex-start',
+    alignItems: 'center',
     padding: 10,
   },
 
+  lableLogin:{
+    width: 150,
+  },
   tagLogin: {
     color: '#fff',
     fontSize: 17,
-
   },
 
   showPass:{
     backgroundColor: '#67209E',
+    flexDirection: 'row',
+    justifyContent: 'center',
+    alignContent: 'center',
     borderRadius: 30,
-    width: 270,
+    width: 230,
     height: 27,
-    zIndex: 1,
     color: '#fff',
-    marginTop: 7,
-    marginBottom: 15,
   },
   imgSenha: {
-    padding: 10,
     height: 25,
     width: 25,
-    margin: 10,
+    marginRight: 5,
     resizeMode: 'stretch',
     alignItems: 'center',
   },
   forgetPass:{
     color: "#fff",
-    marginTop: -10,
-    marginLeft: 10,
     fontWeight: 'bold',
+    padding: 5,
     textDecorationLine: 'underline'
   }
 });
