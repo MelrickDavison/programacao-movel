@@ -62,10 +62,11 @@ export default function App() {
         </View>
     <Text style={styles.forgetPass}>Esqueceu a Senha?</Text>
     </View>
-  </View>
 
   <View style={styles.submit}>
-    <Button style={styles.buttonSubmit} title="Entrar" color='#9C56D3'/>
+  <Pressable style={styles.buttonSubmit} onPress={''}>
+         <Text style={styles.textButton}>Entrar</Text>
+    </Pressable>
   </View>
 
     
@@ -79,6 +80,8 @@ export default function App() {
       <ButtonLogin nome={"Facebook"} foto={require('./assets/Image/facebook.png')}/>
       <ButtonLogin nome={"Apple"} foto={require('./assets/Image/apple.png')}/>
     </View>
+  </View>
+
 
   </SafeAreaView>
    
@@ -100,7 +103,7 @@ const styles = StyleSheet.create({
     height: 4500,
   },
   logo: {
-    flex: 3,
+    flex: 1,
     height: 150,
     width: 155,
     justifyContent: 'flex-start',
@@ -135,9 +138,7 @@ const styles = StyleSheet.create({
   form: {
     flex: 2,
     padding: 20,
-    justifyContent: 'flex-start',
-    alignItems: 'flex-start',
-    flexDirection: 'column'
+
   },
 
   tagForm: {
@@ -151,11 +152,24 @@ const styles = StyleSheet.create({
 
   submit: {
     flex: 1,
+    padding: 30,
     justifyContent: 'center',
     alignItems: 'center',
     flexDirection:'column'
   },
 
+  buttonSubmit:{
+    backgroundColor: '#67209E',
+    width: 90,
+    height: 30,
+  },
+
+  textButton:{
+    padding: 5,
+    color: '#fff',
+    justifyContent: 'center',
+    textAlign: 'center'
+  },
   loginContainer: {
     flex: 5,
     justifyContent: 'flex-start',
@@ -165,6 +179,8 @@ const styles = StyleSheet.create({
 
   lableLogin:{
     width: 150,
+    justifyContent: 'center',
+    alignItems: 'center',
   },
   tagLogin: {
     color: '#fff',
