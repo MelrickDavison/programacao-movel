@@ -159,7 +159,7 @@ const styles = StyleSheet.create({
   },
 
   buttonSubmit:{
-    backgroundColor: '#67209E',
+    backgroundColor: '#9C56D3',
     width: 90,
     height: 30,
   },
