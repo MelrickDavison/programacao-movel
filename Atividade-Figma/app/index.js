@@ -1,20 +1,20 @@
 import {StatusBar, StyleSheet, Text, View, Image, TextInput, SafeAreaView, Button, Pressable} from 'react-native';
 import { LinearGradient } from 'expo-linear-gradient';
-import ButtonLogin from './Components/buttonLogin';
+import ButtonLogin from '../Components/buttonLogin';
 import { useState } from 'react';
 
 export default function App() {
 
   const [senha, setSenha] = useState(true);
-  const [imgSenha, setImgSenha] = useState(require('./assets/Image/closeEye.png'))
+  const [imgSenha, setImgSenha] = useState(require('../assets/Image/closeEye.png'))
 
   function mudarImg(){
-    if(imgSenha === require('./assets/Image/closeEye.png')){
-      setImgSenha(require('./assets/Image/eye.png'))
+    if(imgSenha === require('../assets/Image/closeEye.png')){
+      setImgSenha(require('../assets/Image/eye.png'))
       setSenha(false)
       console.log(senha)
     }else{
-      setImgSenha(require('./assets/Image/closeEye.png'))
+      setImgSenha(require('../assets/Image/closeEye.png'))
       setSenha(true)
       console.log(senha)
     }
@@ -29,7 +29,7 @@ export default function App() {
         style={styles.background}
       />
       <View style={styles.logo}>
-     <Image style={styles.imgLogo}  source={require('./assets/Image/logo_Instudo.png')} />
+     <Image style={styles.imgLogo}  source={require('../assets/Image/logo_Instudo.png')} />
       </View>
     
   <View style={styles.form}>
@@ -76,9 +76,9 @@ export default function App() {
     </View>
    
 
-      <ButtonLogin nome={"Google"} foto={require('./assets/Image/google.png')}/>
-      <ButtonLogin nome={"Facebook"} foto={require('./assets/Image/facebook.png')}/>
-      <ButtonLogin nome={"Apple"} foto={require('./assets/Image/apple.png')}/>
+      <ButtonLogin nome={"Google"} foto={require('../assets/Image/google.png')}/>
+      <ButtonLogin nome={"Facebook"} foto={require('../assets/Image/facebook.png')}/>
+      <ButtonLogin nome={"Apple"} foto={require('../assets/Image/apple.png')}/>
     </View>
   </View>
 
