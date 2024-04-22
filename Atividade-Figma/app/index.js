@@ -2,6 +2,7 @@ import {StatusBar, StyleSheet, Text, View, Image, TextInput, SafeAreaView, Butto
 import { LinearGradient } from 'expo-linear-gradient';
 import ButtonLogin from '../Components/buttonLogin';
 import { useState } from 'react';
+import { Link } from 'expo-router';
 
 export default function App() {
 
@@ -63,10 +64,13 @@ export default function App() {
     <Text style={styles.forgetPass}>Esqueceu a Senha?</Text>
     </View>
 
+
   <View style={styles.submit}>
+    <Link>
   <Pressable style={styles.buttonSubmit} onPress={''}>
          <Text style={styles.textButton}>Entrar</Text>
     </Pressable>
+    </Link>
   </View>
 
     
