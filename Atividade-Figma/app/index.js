@@ -66,7 +66,7 @@ export default function App() {
 
 
   <View style={styles.submit}>
-    <Link>
+    <Link href={'/home'}>
   <Pressable style={styles.buttonSubmit} onPress={''}>
          <Text style={styles.textButton}>Entrar</Text>
     </Pressable>
