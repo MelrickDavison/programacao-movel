@@ -1,0 +1,38 @@
+<script type="module">
+    // Import the functions you need from the SDKs you need
+    import { initializeApp } from "https://www.gstatic.com/firebasejs/10.12.4/firebase-app.js";
+    // TODO: Add SDKs for Firebase products that you want to use
+    // https://firebase.google.com/docs/web/setup#available-libraries
+  
+    // Your web app's Firebase configuration
+    const firebaseConfig = {
+      apiKey: "AIzaSyCvAJIaQ-9hxFlI0ZXoChACGFIQXg8IKvs",
+      authDomain: "instudo-com-voce.firebaseapp.com",
+      projectId: "instudo-com-voce",
+      storageBucket: "instudo-com-voce.appspot.com",
+      messagingSenderId: "776660738382",
+      appId: "1:776660738382:web:0c82403f21bcbbe8817e1f"
+    };
+  
+    // Initialize Firebase
+    const app = initializeApp(firebaseConfig);
+
+    import { getAuth, signInWithEmailAndPassword } from "https://www.gstatic.com/firebasejs/10.12.4/firebase-auth.js";
+
+    const auth = getAuth();
+    signInWithEmailAndPassword(auth, 'fagc1@aluno.ifal.edu.br', 'Fabricio13')
+    .then((userCredential) => {
+        // Signed in 
+        const user = userCredential.user;
+        console.log(user);
+        // ...
+    })
+    .catch((error) => {
+        const errorCode = error.code;
+        const errorMessage = error.message;
+
+        console.log(errorCode);
+        console.log(errorMessage);
+    });
+    
+  </script>
