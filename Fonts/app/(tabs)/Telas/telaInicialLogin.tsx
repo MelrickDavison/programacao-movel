@@ -50,7 +50,7 @@ export default function App() {
         <View style={styles.logo}>
         <Image 
         style={styles.imagemLogo}
-        source={require('../../../assets/images/logoInstudo.png')}/>
+        source={require('../../../assets/images/telaInicialLogin/logoInstudo.png')}/>
         <Text style={styles.titulo} >Instudo</Text>
         </View>
         <View style={styles.linha}>
