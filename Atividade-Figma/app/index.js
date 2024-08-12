@@ -2,13 +2,13 @@ import {StatusBar, StyleSheet, Text, View, Image, TextInput, SafeAreaView, Butto
 import { LinearGradient } from 'expo-linear-gradient';
 import ButtonLogin from '../Components/buttonLogin';
 import { useState } from 'react';
-import { Link } from 'expo-router';
+import { Link, useRouter } from 'expo-router';
 
 export default function App() {
 
   const [senha, setSenha] = useState(true);
   const [imgSenha, setImgSenha] = useState(require('../assets/Image/closeEye.png'))
-
+  const router = useRouter()
   function mudarImg(){
     if(imgSenha === require('../assets/Image/closeEye.png')){
       setImgSenha(require('../assets/Image/eye.png'))
@@ -71,7 +71,7 @@ export default function App() {
          <Text style={styles.textButton}>Entrar</Text>
     </Pressable>
     </Link>
-  </View>
+  </View>     
 
     
   <View style={styles.loginContainer}>
