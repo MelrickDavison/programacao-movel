@@ -4,10 +4,19 @@ import { auth } from '../../../firebaseConfig';
 import { signInWithEmailAndPassword } from "firebase/auth";
 import { LinearGradient } from 'expo-linear-gradient';
 import ButtonLogin from '../../../components//Components/buttonLogin';
-import { useState } from 'react';
+import { useState, useEffect} from 'react';
 import { Link, useRouter } from 'expo-router';
+//Só vai utilizar uma vez
+import {useFonts} from 'expo-font' 
+import * as SplashScreen from 'expo-splash-screen';
 
-
+//Um import para cada fonte
+import {Inter_900Black} from '@expo-google-fonts/inter' //https://github.com/expo/google-fonts
+import { LaBelleAurore_400Regular } from '@expo-google-fonts/la-belle-aurore'
+import { Ubuntu_500Medium } from '@expo-google-fonts/ubuntu';
+import { KumbhSans_500Medium } from '@expo-google-fonts/kumbh-sans';
+import { Nunito_700Bold  } from '@expo-google-fonts/nunito'
+import { Raleway_600SemiBold } from '@expo-google-fonts/raleway'
 
 
 export default function telaLogin() {
@@ -26,6 +35,28 @@ export default function telaLogin() {
       setImgSenha(require('../../../assets/images/ImagesLogin/closeEye.png'))
       setSenhaState(true)
     }
+  }
+
+SplashScreen.preventAutoHideAsync();
+
+     //Fazer o import de cada fonte
+   const [loaded, error] = useFonts({
+    LaBelleAurore_400Regular,
+    Ubuntu_500Medium,
+    KumbhSans_500Medium,
+    Nunito_700Bold,
+    Raleway_600SemiBold
+  });
+
+//Controle da Splash Screen
+  useEffect(() => {
+    if (loaded || error) {
+      SplashScreen.hideAsync(); //Se a fonte for carregada ou tiver um erro vai esconder a splash screen
+    }
+  }, [loaded, error]);
+
+  if (!loaded && !error) {
+    return null;
   }
 
     const handleLogin = () => {
@@ -70,7 +101,7 @@ export default function telaLogin() {
      
         <View style={styles.form}>
 
-<View style={styles.option}>
+<View>
   <Text style={styles.tagForm}>Login:</Text>
       <TextInput
         style={styles.input}
@@ -82,7 +113,7 @@ export default function telaLogin() {
       />
 </View>
 
-<View style={styles.option}>
+<View>
     <Text style={styles.tagForm}>Senha:</Text>
     <View  style={styles.showPass}>
      
@@ -169,7 +200,7 @@ const styles = StyleSheet.create({
     color: '#fff',
   },
 
-  option: {
+  optionForm: {
     color: '#fff',
   },
 
@@ -221,6 +252,7 @@ const styles = StyleSheet.create({
     color: '#fff',
     marginTop: 20,
     fontSize: 18,
+    fontFamily: 'Nunito_700Bold'
   },
 
   submit: {
@@ -241,7 +273,8 @@ const styles = StyleSheet.create({
     padding: 5,
     color: '#fff',
     justifyContent: 'center',
-    textAlign: 'center'
+    textAlign: 'center',
+    fontFamily: 'KumbhSans_500Medium'
   },
   loginContainer: {
     flex: 5,
@@ -258,6 +291,7 @@ const styles = StyleSheet.create({
   tagLogin: {
     color: '#fff',
     fontSize: 17,
+    fontFamily: 'Raleway_600SemiBold'
   },
 
   showPass:{
