@@ -17,6 +17,8 @@ import { Ubuntu_500Medium } from '@expo-google-fonts/ubuntu';
 import { KumbhSans_500Medium } from '@expo-google-fonts/kumbh-sans';
 import { Nunito_700Bold  } from '@expo-google-fonts/nunito'
 import { Raleway_600SemiBold } from '@expo-google-fonts/raleway'
+import { async } from '@firebase/util';
+import { FirebaseApp, FirebaseError} from 'firebase/app';
 
 
 export default function telaLogin() {
@@ -59,21 +61,19 @@ SplashScreen.preventAutoHideAsync();
     return null;
   }
 
-    const handleLogin = () => {
-        signInWithEmailAndPassword(auth, email, senha)
-            .then((userCredential) => {
-            // Signed in 
-            const user = userCredential.user;
-            console.log(user);
-            router.replace('/home')
-            // ...
-        })
-        .catch((error) => {
-            const errorCode = error.code;
-            const errorMessage = error.message;
-            console.error(errorCode);
-            console.error(errorMessage);
-        });
+    const handleLogin = async () => {
+      try {
+        const userCredential = await signInWithEmailAndPassword(auth, email, senha);
+        const user = userCredential.user;
+        console.log(user);
+        router.replace('/(tabs)/Telas/home');
+
+      } catch (error : any) {
+        const errorCode = error.code;
+        const errorMessage = error.message;
+        console.error(errorCode);
+        console.error(errorMessage);
+      }
     }
 
   return (
@@ -94,9 +94,10 @@ SplashScreen.preventAutoHideAsync();
             source={require('../../../assets/images/telaInicialLogin/logoInstudo.png')}/>
           <Text style={styles.titulo} >Instudo</Text>
           </View>
+          <View style={styles.linha}></View>
       </View>
         
-        <View style={styles.linha}></View>
+       
 
      
         <View style={styles.form}>

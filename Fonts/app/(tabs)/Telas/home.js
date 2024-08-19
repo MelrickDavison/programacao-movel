@@ -1,9 +1,11 @@
 import { StyleSheet, Text, View} from 'react-native';
+import { auth } from '../../../firebaseConfig'
 
 export default function App() {
+  const user = auth.currentUser;
   return (
     <View style={styles.container}>
-      <Text>Hello World</Text>
+      <Text>{user.email}, bem-vindo</Text>
     </View>
   );
 }
