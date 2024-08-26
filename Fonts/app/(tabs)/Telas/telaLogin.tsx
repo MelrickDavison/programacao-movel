@@ -1,4 +1,4 @@
-import { View, Text, Button, StatusBar, StyleSheet, Image, TextInput, SafeAreaView, Pressable } from 'react-native'
+import { View, Text, Button, StatusBar, StyleSheet, Image, TextInput, SafeAreaView, Pressable, Alert } from 'react-native'
 import React from 'react';
 import { auth } from '../../../firebaseConfig';
 import { signInWithEmailAndPassword } from "firebase/auth";
@@ -59,6 +59,7 @@ SplashScreen.preventAutoHideAsync();
     return null;
   }
 
+
     const handleLogin = async () => {
       try {
         const userCredential = await signInWithEmailAndPassword(auth, email, senha);
@@ -67,10 +68,20 @@ SplashScreen.preventAutoHideAsync();
         router.replace('/(tabs)/Telas/home');
 
       } catch (error : any) {
-        const errorCode = error.code;
-        const errorMessage = error.message;
-        console.error(errorCode);
-        console.error(errorMessage);
+      if(error.code == 'auth/invalid-email'){
+        Alert.alert('Invalid Email', 'Email invalid, try again', [
+          {text: 'OK', onPress: () => console.log('OK Pressed')},
+        ]);    
+      }
+      if(error.code == 'auth/invalid-credential'){
+        Alert.alert('Invalid Credential', 'Credential invalid, try again', [
+
+          {text: 'OK', onPress: () => console.log('OK Pressed')},
+        ]);
+
+        
+      }
+         
       }
     }
 

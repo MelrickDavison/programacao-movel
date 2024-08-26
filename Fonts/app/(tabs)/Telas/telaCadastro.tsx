@@ -1,4 +1,4 @@
-import { View, Text, Button, StatusBar, StyleSheet, Image, TextInput, SafeAreaView, Pressable } from 'react-native'
+import { View, Text, Button, StatusBar, StyleSheet, Image, TextInput, SafeAreaView, Pressable, Alert } from 'react-native'
 import React from 'react';
 import { auth } from '../../../firebaseConfig';
 import { createUserWithEmailAndPassword } from "firebase/auth";
@@ -24,6 +24,8 @@ import { FirebaseApp, FirebaseError} from 'firebase/app';
 export default function telaLogin() {
   const [email, setEmail] = useState('');
   const [senha, setSenha] = useState('');
+  const [senhaRepeat, setSenhaRepeat] = useState('');
+  
   const [senhaState, setSenhaState] = useState(true);
   const [imgSenha, setImgSenha] = useState(require('../../../assets/images/ImagesLogin/closeEye.png'))
   const router = useRouter();
@@ -59,18 +61,47 @@ SplashScreen.preventAutoHideAsync();
     return null;
   }
 
+
     const handleLogin = async () => {
       try {
-        const userCredential = await createUserWithEmailAndPassword(auth, email, senha);
-        const user = userCredential.user;
-        console.log(user);
-        router.replace('/(tabs)/Telas/home');
-
+        if(senha === senhaRepeat){
+            const userCredential = await createUserWithEmailAndPassword(auth, email, senha);
+            const user = userCredential.user;
+            console.log(user);
+            router.replace('/(tabs)/Telas/home');    
+        }else{
+            throw new Error('Senhas não coincidem')
+        }
+       
       } catch (error : any) {
-        const errorCode = error.code;
-        const errorMessage = error.message;
-        console.error(errorCode);
-        console.error(errorMessage);
+        console.log(error.code)
+        console.log(error.message)
+        if(error.message == 'Senhas não coincidem'){
+            Alert.alert('Senhas não coincidem', 'Senhas não coincidem', [
+                {text: 'OK', onPress: () => console.log('OK Pressed')},
+              ]);   
+        return
+        }
+        switch (error.code) {
+            case 'auth/invalid-email':
+                Alert.alert('Invalid Email', 'Email invalid, try again', [
+                    {text: 'OK', onPress: () => console.log('OK Pressed')},
+                  ]);    
+                break;
+            case 'auth/weak-password': 
+               Alert.alert('Weak Password', 'Weak password (less than 6 chars)', [
+                {text: 'OK', onPress: () => console.log('OK Pressed')},
+              ]);    
+            case 'auth/email-already-in-use':
+                Alert.alert('Email Exists', 'Email Exists, try another', [
+                    {text: 'OK', onPress: () => console.log('OK Pressed')},
+                  ]);  
+            default:
+                Alert.alert('Invalid Credentials', 'Invalid Credentials, try again', [
+                    {text: 'OK', onPress: () => console.log('OK Pressed')},
+                  ]); 
+                break;
+        }
       }
     }
 
@@ -133,7 +164,7 @@ SplashScreen.preventAutoHideAsync();
     <TextInput
       style={styles.password}
       secureTextEntry={senhaState}
-      onChangeText={setSenha}
+      onChangeText={setSenhaRepeat}
       placeholder='Digite sua senha'
       placeholderTextColor={"#fff"}
       underlineColorAndroid="transparent"
