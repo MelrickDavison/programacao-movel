@@ -9,7 +9,7 @@ export default function App() {
 
   const handleLogout = async () => {
     await signOut(auth);
-    router.replace('/(tabs)/Telas/telaLogin')  
+    router.replace('/(tabs)/Telas/telaInicialLogin')  
   }
   return (
     <View style={styles.container}>

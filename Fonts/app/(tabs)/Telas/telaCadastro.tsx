@@ -1,7 +1,7 @@
 import { View, Text, Button, StatusBar, StyleSheet, Image, TextInput, SafeAreaView, Pressable } from 'react-native'
 import React from 'react';
 import { auth } from '../../../firebaseConfig';
-import { signInWithEmailAndPassword } from "firebase/auth";
+import { createUserWithEmailAndPassword } from "firebase/auth";
 import { LinearGradient } from 'expo-linear-gradient';
 import ButtonLogin from '../../../components//Components/buttonLogin';
 import { useState, useEffect} from 'react';
@@ -61,7 +61,7 @@ SplashScreen.preventAutoHideAsync();
 
     const handleLogin = async () => {
       try {
-        const userCredential = await signInWithEmailAndPassword(auth, email, senha);
+        const userCredential = await createUserWithEmailAndPassword(auth, email, senha);
         const user = userCredential.user;
         console.log(user);
         router.replace('/(tabs)/Telas/home');
@@ -146,7 +146,7 @@ SplashScreen.preventAutoHideAsync();
 
     <View style={styles.submit}>
         <Pressable style={styles.buttonSubmit} onPress={handleLogin}>
-         <Text style={styles.textButton}>Entrar</Text>
+         <Text style={styles.textButton}>Cadastrar</Text>
         </Pressable>
 
     </View>
