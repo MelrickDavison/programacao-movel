@@ -1,4 +1,4 @@
-import { View, Text, Button, StatusBar, StyleSheet, Image, TextInput, SafeAreaView, Pressable, Alert } from 'react-native'
+import { View, Text, Button, StatusBar, StyleSheet, Image, TextInput, SafeAreaView, Pressable, Alert, ActivityIndicator} from 'react-native'
 import React from 'react';
 import { auth } from '../../../firebaseConfig';
 import { createUserWithEmailAndPassword } from "firebase/auth";
@@ -25,7 +25,8 @@ export default function telaLogin() {
   const [email, setEmail] = useState('');
   const [senha, setSenha] = useState('');
   const [senhaRepeat, setSenhaRepeat] = useState('');
-  
+  const [carregamento, setCarregamento] = useState(false)
+
   const [senhaState, setSenhaState] = useState(true);
   const [imgSenha, setImgSenha] = useState(require('../../../assets/images/ImagesLogin/closeEye.png'))
   const router = useRouter();
@@ -65,10 +66,12 @@ SplashScreen.preventAutoHideAsync();
     const handleLogin = async () => {
       try {
         if(senha === senhaRepeat){
+            setCarregamento(true)
             const userCredential = await createUserWithEmailAndPassword(auth, email, senha);
             const user = userCredential.user;
             console.log(user);
-            router.replace('/(tabs)/Telas/home');    
+            router.replace('/(tabs)/Telas/home'); 
+            setCarregamento(true)   
         }else{
             throw new Error('Senhas não coincidem')
         }
@@ -174,7 +177,7 @@ SplashScreen.preventAutoHideAsync();
       </Pressable>
     </View>
 </View>
-
+<ActivityIndicator size={'large'} animating={carregamento}/>
     <View style={styles.submit}>
         <Pressable style={styles.buttonSubmit} onPress={handleLogin}>
          <Text style={styles.textButton}>Cadastrar</Text>

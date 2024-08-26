@@ -1,4 +1,4 @@
-import { View, Text, Button, StatusBar, StyleSheet, Image, TextInput, SafeAreaView, Pressable, Alert } from 'react-native'
+import { View, Text, Button, StatusBar, StyleSheet, Image, TextInput, SafeAreaView, Pressable, Alert, ActivityIndicator} from 'react-native'
 import React from 'react';
 import { auth } from '../../../firebaseConfig';
 import { signInWithEmailAndPassword } from "firebase/auth";
@@ -26,6 +26,7 @@ export default function telaLogin() {
   const [senha, setSenha] = useState('');
   const [senhaState, setSenhaState] = useState(true);
   const [imgSenha, setImgSenha] = useState(require('../../../assets/images/ImagesLogin/closeEye.png'))
+  const [carregamento, setCarregamento] = useState(false)
   const router = useRouter();
   function mudarImg(){
     if(imgSenha === require('../../../assets/images/ImagesLogin/closeEye.png')){
@@ -62,10 +63,12 @@ SplashScreen.preventAutoHideAsync();
 
     const handleLogin = async () => {
       try {
+        setCarregamento(true)
         const userCredential = await signInWithEmailAndPassword(auth, email, senha);
         const user = userCredential.user;
         console.log(user);
         router.replace('/(tabs)/Telas/home');
+        setCarregamento(false)
 
       } catch (error : any) {
       if(error.code == 'auth/invalid-email'){
@@ -142,7 +145,7 @@ SplashScreen.preventAutoHideAsync();
 <Text style={styles.forgetPass}>Esqueceu a Senha?</Text>
 </View>
 
-
+<ActivityIndicator size={'large'} animating={carregamento}/>
     <View style={styles.submit}>
         <Pressable style={styles.buttonSubmit} onPress={handleLogin}>
          <Text style={styles.textButton}>Entrar</Text>
