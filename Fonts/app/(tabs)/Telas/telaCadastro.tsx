@@ -110,10 +110,8 @@ SplashScreen.preventAutoHideAsync();
         placeholderTextColor={"#fff"}
         selectionColor={'#fff'}
       />
-</View>
 
-<View>
-    <Text style={styles.tagForm}>Senha:</Text>
+    <Text style={styles.tagForm}> Definir senha:</Text>
     <View  style={styles.showPass}>
      
     <TextInput
@@ -128,9 +126,23 @@ SplashScreen.preventAutoHideAsync();
         <Image style={styles.imgSenha} source={imgSenha}/>
       </Pressable>
     </View>
-<Text style={styles.forgetPass}>Esqueceu a Senha?</Text>
-</View>
 
+    <Text style={styles.tagForm}>Repetir senha:</Text>
+    <View  style={styles.showPass}>
+     
+    <TextInput
+      style={styles.password}
+      secureTextEntry={senhaState}
+      onChangeText={setSenha}
+      placeholder='Digite sua senha'
+      placeholderTextColor={"#fff"}
+      underlineColorAndroid="transparent"
+    />
+     <Pressable onPress={mudarImg}>
+        <Image style={styles.imgSenha} source={imgSenha}/>
+      </Pressable>
+    </View>
+</View>
 
     <View style={styles.submit}>
         <Pressable style={styles.buttonSubmit} onPress={handleLogin}>
@@ -234,9 +246,8 @@ const styles = StyleSheet.create({
   },
 
   password: {
-    height: 30,
     color: '#fff',
-    paddingLeft: 15,
+    marginLeft: 8,
     width: 130,
     flexDirection: 'row',
     flex: 1,

@@ -1,11 +1,11 @@
-import { useRoute } from '@react-navigation/native';
+import { useRouter } from 'expo-router'
 import { signOut } from 'firebase/auth';
 import { StyleSheet, Text, View, Button} from 'react-native';
 import { auth } from '../../../firebaseConfig';
 
 export default function App() {
   const user = auth.currentUser;
-  const router = useRoute();
+  const router = useRouter();
 
   const handleLogout = async () => {
     await signOut(auth);

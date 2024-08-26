@@ -1,6 +1,6 @@
 import { View, Text, StyleSheet , Pressable, Image} from 'react-native'
 import React, {useState, useEffect} from 'react'
-
+import { useRouter } from 'expo-router'
 //Só vai utilizar uma vez
 import {useFonts} from 'expo-font' 
 import * as SplashScreen from 'expo-splash-screen';
@@ -10,6 +10,7 @@ import {Inter_900Black} from '@expo-google-fonts/inter' //https://github.com/exp
 import { LaBelleAurore_400Regular } from '@expo-google-fonts/la-belle-aurore'
 import { Ubuntu_500Medium } from '@expo-google-fonts/ubuntu';
 import { KumbhSans_500Medium } from '@expo-google-fonts/kumbh-sans';
+import { prependOnceListener } from 'process';
 
 
 SplashScreen.preventAutoHideAsync();
@@ -23,6 +24,16 @@ export default function App() {
     Ubuntu_500Medium,
     KumbhSans_500Medium
   });
+
+  const router = useRouter();
+
+  function goToLogin(){
+    router.navigate('/(tabs)/Telas/telaLogin')
+  }
+
+  function goToCadastro(){
+    router.navigate('/(tabs)/Telas/telaCadastro')
+  }
 
 //Controle da Splash Screen
   useEffect(() => {
@@ -38,10 +49,10 @@ export default function App() {
   return (
     <View style={styles .container}>
       <View style={styles.containerLogin}>
-        <Pressable style={styles.botaoLogin}>
+        <Pressable style={styles.botaoLogin} onPress={goToLogin}>
           <Text style={styles.textoLogin}>Login</Text>
         </Pressable>
-        <Pressable style={styles.botaoSign}>
+        <Pressable style={styles.botaoSign}  onPress={goToCadastro}>
           <Text style={styles.textoSign}>Sign in</Text>
         </Pressable>
       </View>
@@ -93,7 +104,7 @@ const styles = StyleSheet.create({
       borderWidth: 2,
       borderColor: '#9C56D3',
       padding: 6,
-      width: 70,
+      width: 90,
       borderRadius: 10,
       marginRight: 2,
     },
@@ -108,7 +119,7 @@ const styles = StyleSheet.create({
     botaoSign: {
       backgroundColor: '#9C56D3',
       padding: 6,
-      width: 70,
+      width: 90,
       borderRadius: 10,
       marginLeft: 12,
       marginRight: 12,
