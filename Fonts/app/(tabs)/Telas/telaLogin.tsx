@@ -1,11 +1,11 @@
-import { View, Text, StatusBar, StyleSheet, Image, TextInput, SafeAreaView, Pressable, Alert, ImageBackground} from 'react-native'
+import { View, Text, StatusBar, StyleSheet, Image, SafeAreaView, Pressable, Alert, ImageBackground} from 'react-native'
 import React from 'react';
 import { auth } from '../../../firebaseConfig';
 import { signInWithEmailAndPassword } from "firebase/auth";
 import { LinearGradient } from 'expo-linear-gradient';
 import ButtonLogin from '../../../components//Components/buttonLogin';
 import { useState, useEffect} from 'react';
-import { Button, Appbar} from 'react-native-paper';
+import { Button, Appbar, TextInput} from 'react-native-paper';
 import { Link, useRouter } from 'expo-router';
 //Só vai utilizar uma vez
 import {useFonts} from 'expo-font' 
@@ -94,47 +94,29 @@ SplashScreen.preventAutoHideAsync();
     <SafeAreaView style={styles.container}>
       <StatusBar/>
 
-     
-        <LinearGradient
-          colors={['#1A191A', 'transparent']}
-          style={styles.background}
-        />
         
     <Appbar.Header style={styles.cabecalho}>
-      <Appbar.BackAction onPress={() => {}} color={'#fff'}/>
+      <Appbar.BackAction onPress={() => {router.replace('/(tabs)/Telas/telaInicialLogin');}} color={'#fff'}/>
       <Appbar.Content title={<Text style={{color:'#fff', fontFamily:'Ubuntu_500Medium', fontSize: 25}}>Login</Text>} />
     </Appbar.Header>
 
      
 <View style={styles.form}>
-  <View style={{paddingLeft: 12}}>
-    <Text style={styles.tagForm} >Login:</Text>
+  <View style={{paddingLeft: 12, paddingTop: 20}}>
         <TextInput
-          style={styles.input}
-          onChangeText={setEmail}
-          selectTextOnFocus= {true}
-          placeholder='Digite seu login'
-          placeholderTextColor={"#fff"}
-          selectionColor={'#fff'}
+           mode="flat"
+           label="Login"
+           placeholder="Email ou Usuário"
         />
   </View>
 
-  <View style={{paddingLeft: 12}}>
-      <Text style={styles.tagForm}>Senha:</Text>
-      <View  style={styles.showPass}>
-      
+  <View style={{paddingLeft: 12, paddingTop: 20}}>
       <TextInput
-        style={styles.password}
-        secureTextEntry={senhaState}
-        onChangeText={setSenha}
-        placeholder='Digite sua senha'
-        placeholderTextColor={"#fff"}
-        underlineColorAndroid="transparent"
-      />
-      <Pressable onPress={mudarImg}>
-          <Image style={styles.imgSenha} source={imgSenha}/>
-        </Pressable>
-  </View>
+      label="Password"
+      secureTextEntry={senhaState}
+      right={<TextInput.Icon icon={imgSenha} onPress={mudarImg}/>}
+    />
+
 <Text style={styles.forgetPass}>Esqueceu a Senha?</Text>
 </View>
 
@@ -171,44 +153,20 @@ SplashScreen.preventAutoHideAsync();
 const styles = StyleSheet.create({
   container: {
     flex: 1,
-    backgroundColor: '#9C56D3',
-    
+    backgroundColor:'#1A191A'
   },
-cabecalho:{
-  backgroundColor:'transparent',
-  borderBottomWidth: 2,
-  borderColor: '#67209E'
-},
+  cabecalho:{
+    backgroundColor:'transparent',
+    borderBottomWidth: 2,
+    borderColor: '#67209E'
+  },
 
   background: {
     position: 'absolute',
     left: 0,
     right: 0,
     top: 0,
-    height: 4500,
-  },
-
-  containerTitulo:{
-    paddingHorizontal: 22,
-    alignItems: 'flex-start',
-    justifyContent: 'flex-start'
-  },
-
-  imagemLogo:{
-    marginLeft: 5,
-  },
-  
-  logo:{
-    marginTop: -15
-  },
-
-  subtitulo: {
-    color: "#FFF06A",
-    marginTop: 50,
-    fontSize: 30,
-    textAlign: 'center',
-    fontFamily: 'LaBelleAurore_400Regular',
-    marginLeft: 5,
+    height: 4500
   },
 
   campForm:{
@@ -240,7 +198,7 @@ cabecalho:{
 
   form: {
     flex: 2,
-    marginTop: 20
+    marginTop: 20,
   },
 
   tagForm: {
@@ -254,7 +212,9 @@ cabecalho:{
     justifyContent: 'center',
     alignItems: 'center',
     marginTop: 50,
-    width: 150,
+    marginBottom: 20,
+    height: 'auto',
+    width: 'auto',
   },
 
   loginContainer: {
