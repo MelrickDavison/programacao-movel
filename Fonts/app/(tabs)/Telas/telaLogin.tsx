@@ -1,10 +1,11 @@
-import { View, Text, Button, StatusBar, StyleSheet, Image, TextInput, SafeAreaView, Pressable, Alert, ActivityIndicator} from 'react-native'
+import { View, Text, StatusBar, StyleSheet, Image, TextInput, SafeAreaView, Pressable, Alert} from 'react-native'
 import React from 'react';
 import { auth } from '../../../firebaseConfig';
 import { signInWithEmailAndPassword } from "firebase/auth";
 import { LinearGradient } from 'expo-linear-gradient';
 import ButtonLogin from '../../../components//Components/buttonLogin';
 import { useState, useEffect} from 'react';
+import { Button,} from 'react-native-paper';
 import { Link, useRouter } from 'expo-router';
 //Só vai utilizar uma vez
 import {useFonts} from 'expo-font' 
@@ -68,15 +69,16 @@ SplashScreen.preventAutoHideAsync();
         const user = userCredential.user;
         console.log(user);
         router.replace('/(tabs)/Telas/home');
-        setCarregamento(false)
 
       } catch (error : any) {
       if(error.code == 'auth/invalid-email'){
+        setCarregamento(false)
         Alert.alert('Invalid Email', 'Email invalid, try again', [
           {text: 'OK', onPress: () => console.log('OK Pressed')},
         ]);    
       }
       if(error.code == 'auth/invalid-credential'){
+        setCarregamento(false)
         Alert.alert('Invalid Credential', 'Credential invalid, try again', [
 
           {text: 'OK', onPress: () => console.log('OK Pressed')},
@@ -115,7 +117,7 @@ SplashScreen.preventAutoHideAsync();
         <View style={styles.form}>
 
 <View>
-  <Text style={styles.tagForm}>Login:</Text>
+  <Text style={styles.tagForm} >Login:</Text>
       <TextInput
         style={styles.input}
         onChangeText={setEmail}
@@ -145,13 +147,9 @@ SplashScreen.preventAutoHideAsync();
 <Text style={styles.forgetPass}>Esqueceu a Senha?</Text>
 </View>
 
-<ActivityIndicator size={'large'} animating={carregamento}/>
     <View style={styles.submit}>
-        <Pressable style={styles.buttonSubmit} onPress={handleLogin}>
-         <Text style={styles.textButton}>Entrar</Text>
-        </Pressable>
-
-    </View>
+        <Button loading={carregamento} buttonColor={'#67209E'} mode="contained" onPress={handleLogin}>Entrar</Button>
+ </View>
 
     
     <View style={styles.loginContainer}>

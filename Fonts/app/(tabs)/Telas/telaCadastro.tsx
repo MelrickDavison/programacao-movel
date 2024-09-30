@@ -1,5 +1,6 @@
-import { View, Text, Button, StatusBar, StyleSheet, Image, TextInput, SafeAreaView, Pressable, Alert, ActivityIndicator} from 'react-native'
+import { View, Text, StatusBar, StyleSheet, Image, TextInput, SafeAreaView, Pressable, Alert} from 'react-native'
 import React from 'react';
+import { Button } from 'react-native-paper';
 import { auth } from '../../../firebaseConfig';
 import { createUserWithEmailAndPassword } from "firebase/auth";
 import { LinearGradient } from 'expo-linear-gradient';
@@ -71,7 +72,7 @@ SplashScreen.preventAutoHideAsync();
             const user = userCredential.user;
             console.log(user);
             router.replace('/(tabs)/Telas/home'); 
-            setCarregamento(true)   
+         
         }else{
             throw new Error('Senhas não coincidem')
         }
@@ -80,6 +81,7 @@ SplashScreen.preventAutoHideAsync();
         console.log(error.code)
         console.log(error.message)
         if(error.message == 'Senhas não coincidem'){
+          setCarregamento(false)   
             Alert.alert('Senhas não coincidem', 'Senhas não coincidem', [
                 {text: 'OK', onPress: () => console.log('OK Pressed')},
               ]);   
@@ -87,19 +89,23 @@ SplashScreen.preventAutoHideAsync();
         }
         switch (error.code) {
             case 'auth/invalid-email':
+                setCarregamento(false) 
                 Alert.alert('Invalid Email', 'Email invalid, try again', [
                     {text: 'OK', onPress: () => console.log('OK Pressed')},
                   ]);    
                 break;
             case 'auth/weak-password': 
+                setCarregamento(false) 
                Alert.alert('Weak Password', 'Weak password (less than 6 chars)', [
                 {text: 'OK', onPress: () => console.log('OK Pressed')},
               ]);    
             case 'auth/email-already-in-use':
+                setCarregamento(false) 
                 Alert.alert('Email Exists', 'Email Exists, try another', [
                     {text: 'OK', onPress: () => console.log('OK Pressed')},
                   ]);  
             default:
+                setCarregamento(false) 
                 Alert.alert('Invalid Credentials', 'Invalid Credentials, try again', [
                     {text: 'OK', onPress: () => console.log('OK Pressed')},
                   ]); 
@@ -177,11 +183,8 @@ SplashScreen.preventAutoHideAsync();
       </Pressable>
     </View>
 </View>
-<ActivityIndicator size={'large'} animating={carregamento}/>
     <View style={styles.submit}>
-        <Pressable style={styles.buttonSubmit} onPress={handleLogin}>
-         <Text style={styles.textButton}>Cadastrar</Text>
-        </Pressable>
+        <Button loading={carregamento} buttonColor={'#67209E'} mode="contained" onPress={handleLogin}>Cadastrar</Button>
 
     </View>
 
