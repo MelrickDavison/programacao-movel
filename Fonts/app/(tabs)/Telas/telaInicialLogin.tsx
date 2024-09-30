@@ -1,4 +1,4 @@
-import { View, Text, StyleSheet , Pressable, Image} from 'react-native'
+import { View, Text, StyleSheet , Pressable, Image, ImageBackground} from 'react-native'
 import React, {useState, useEffect} from 'react'
 import { useRouter } from 'expo-router'
 //Só vai utilizar uma vez
@@ -47,7 +47,7 @@ export default function App() {
   }
 
   return (
-    <View style={styles .container}>
+<View style={styles .container}>
       <View style={styles.containerLogin}>
         <Pressable style={styles.botaoLogin} onPress={goToLogin}>
           <Text style={styles.textoLogin}>Login</Text>
@@ -68,7 +68,31 @@ export default function App() {
         </View>
       </View>
 
+
+  <ImageBackground source={require('./../../../assets/images/telaInicialLogin/backImage.png')} style={styles.imageBack}>
+    <View style={styles.colunaImagens}>
+      <View style={styles.linhaImagensDireita}>
+        <Image source={require('./../../../assets/images/telaInicialLogin/quimica 1.png')} style={styles.imageColuna}/>
+      </View>
+      <View>
+        <Image source={require('./../../../assets/images/telaInicialLogin/historia 1.png')} style={styles.imageColuna}/>
+      </View>
+      <View style={styles.linhaImagensDireita}>
+        <Image source={require('./../../../assets/images/telaInicialLogin/globo 1.png')} style={styles.imageColuna}/>
+      </View>
+      <View>
+        <Image source={require('./../../../assets/images/telaInicialLogin/geometria 1.png')} style={styles.imageColuna}/>
+      </View>
+      <View style={styles.linhaImagensDireita}>
+        <Image source={require('./../../../assets/images/telaInicialLogin/ciencia 1.png')} style={styles.imageColuna}/>
+      </View>
     </View>
+
+  </ImageBackground>
+
+</View>
+
+  
   );
   
 }
@@ -158,5 +182,35 @@ const styles = StyleSheet.create({
       height: 2.5,
       marginTop: 7,
     },
+
+    colunaImagens:{ 
+      flex:1, 
+      flexDirection:'column', 
+      alignItems: 'flex-end',
+      paddingRight: 30,
+      justifyContent: 'center'
+  },
+
+  linhaImagensDireita:{
+    width: 138,
+    flexDirection: 'row',
+    alignItems: 'flex-end',
+  },
+
+  linhaImagensEsquerda:{
+    width: 138,
+    flexDirection: 'row',
+    alignItems: 'flex-start',
+  },
+
+    imageColuna:{
+      marginTop: 20,
+      height: 58,
+      width: 58
+  },
+
+  imageBack:{
+    flex: 1
+  }
 
   });
