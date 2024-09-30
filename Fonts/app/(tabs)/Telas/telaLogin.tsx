@@ -1,11 +1,11 @@
-import { View, Text, StatusBar, StyleSheet, Image, TextInput, SafeAreaView, Pressable, Alert} from 'react-native'
+import { View, Text, StatusBar, StyleSheet, Image, TextInput, SafeAreaView, Pressable, Alert, ImageBackground} from 'react-native'
 import React from 'react';
 import { auth } from '../../../firebaseConfig';
 import { signInWithEmailAndPassword } from "firebase/auth";
 import { LinearGradient } from 'expo-linear-gradient';
 import ButtonLogin from '../../../components//Components/buttonLogin';
 import { useState, useEffect} from 'react';
-import { Button,} from 'react-native-paper';
+import { Button, Appbar} from 'react-native-paper';
 import { Link, useRouter } from 'expo-router';
 //Só vai utilizar uma vez
 import {useFonts} from 'expo-font' 
@@ -99,69 +99,67 @@ SplashScreen.preventAutoHideAsync();
           colors={['#1A191A', 'transparent']}
           style={styles.background}
         />
-
-        <View style={styles.containerTitulo}>
-          <Text style={styles.subtitulo} >Welcome to</Text>
-          <View style={styles.logo}>
-          <Image 
-            style={styles.imagemLogo}
-            source={require('../../../assets/images/telaInicialLogin/logoInstudo.png')}/>
-          <Text style={styles.titulo} >Instudo</Text>
-          </View>
-          <View style={styles.linha}></View>
-      </View>
         
-       
+    <Appbar.Header style={styles.cabecalho}>
+      <Appbar.BackAction onPress={() => {}} color={'#fff'}/>
+      <Appbar.Content title={<Text style={{color:'#fff', fontFamily:'Ubuntu_500Medium', fontSize: 25}}>Login</Text>} />
+    </Appbar.Header>
 
      
-        <View style={styles.form}>
+<View style={styles.form}>
+  <View style={{paddingLeft: 12}}>
+    <Text style={styles.tagForm} >Login:</Text>
+        <TextInput
+          style={styles.input}
+          onChangeText={setEmail}
+          selectTextOnFocus= {true}
+          placeholder='Digite seu login'
+          placeholderTextColor={"#fff"}
+          selectionColor={'#fff'}
+        />
+  </View>
 
-<View>
-  <Text style={styles.tagForm} >Login:</Text>
+  <View style={{paddingLeft: 12}}>
+      <Text style={styles.tagForm}>Senha:</Text>
+      <View  style={styles.showPass}>
+      
       <TextInput
-        style={styles.input}
-        onChangeText={setEmail}
-        selectTextOnFocus= {true}
-        placeholder='Digite seu login'
+        style={styles.password}
+        secureTextEntry={senhaState}
+        onChangeText={setSenha}
+        placeholder='Digite sua senha'
         placeholderTextColor={"#fff"}
-        selectionColor={'#fff'}
+        underlineColorAndroid="transparent"
       />
-</View>
-
-<View>
-    <Text style={styles.tagForm}>Senha:</Text>
-    <View  style={styles.showPass}>
-     
-    <TextInput
-      style={styles.password}
-      secureTextEntry={senhaState}
-      onChangeText={setSenha}
-      placeholder='Digite sua senha'
-      placeholderTextColor={"#fff"}
-      underlineColorAndroid="transparent"
-    />
-     <Pressable onPress={mudarImg}>
-        <Image style={styles.imgSenha} source={imgSenha}/>
-      </Pressable>
-    </View>
+      <Pressable onPress={mudarImg}>
+          <Image style={styles.imgSenha} source={imgSenha}/>
+        </Pressable>
+  </View>
 <Text style={styles.forgetPass}>Esqueceu a Senha?</Text>
 </View>
 
-    <View style={styles.submit}>
-        <Button loading={carregamento} buttonColor={'#67209E'} mode="contained" onPress={handleLogin}>Entrar</Button>
- </View>
 
-    
+       
+
+
+
+ <ImageBackground source={require('./../../../assets/images/ImagesLogin/imageBack.png')} style={{flex: 1, width: "100%", height: "100%" }}> 
+ 
     <View style={styles.loginContainer}>
-      <View style={styles.lableLogin}>
-        <Text style={styles.tagLogin}>Entrar com:</Text>
-      </View>
-   
+    <Button loading={carregamento} buttonColor={'#67209E'} mode="contained" onPress={handleLogin} style={styles.submit}>Entrar</Button>
+        <View style={styles.lableLogin}>
+          <Text style={styles.tagLogin}>Entrar com:</Text>
+        </View>
+    
 
-      <ButtonLogin nome={"Google"} foto={require('../../../assets/images/ImagesLogin/google.png')}/>
-      <ButtonLogin nome={"Facebook"} foto={require('../../../assets/images/ImagesLogin/facebook.png')}/>
-      <ButtonLogin nome={"Apple"} foto={require('../../../assets/images/ImagesLogin/apple.png')}/>
-    </View>
+        <ButtonLogin nome={"Google"} foto={require('../../../assets/images/ImagesLogin/google.png')}/>
+        <ButtonLogin nome={"Facebook"} foto={require('../../../assets/images/ImagesLogin/facebook.png')}/>
+        <ButtonLogin nome={"Apple"} foto={require('../../../assets/images/ImagesLogin/apple.png')}/>
+  
+   </View>
+   </ImageBackground>
+
+
   </View>
 
   </SafeAreaView>
@@ -176,6 +174,12 @@ const styles = StyleSheet.create({
     backgroundColor: '#9C56D3',
     
   },
+cabecalho:{
+  backgroundColor:'transparent',
+  borderBottomWidth: 2,
+  borderColor: '#67209E'
+},
+
   background: {
     position: 'absolute',
     left: 0,
@@ -215,26 +219,6 @@ const styles = StyleSheet.create({
     color: '#fff',
   },
 
-   titulo: {
-    textAlign: 'center',
-    fontFamily: 'Ubuntu_500Medium',
-    fontSize: 60,
-    color: '#fff',
-    marginTop: -20,
-  },
-
-  linha:{
-    backgroundColor: '#9C56D3',
-    width: 260,
-    height: 2.5,
-    marginTop: 7,
-  },
-  imgLogo: {
-    height: 140,
-    width: 305,
-    objectFit: 'contain'
-  },
-
   input: {
     height: 30,
     width: 270,
@@ -256,8 +240,7 @@ const styles = StyleSheet.create({
 
   form: {
     flex: 2,
-    padding: 20,
-
+    marginTop: 20
   },
 
   tagForm: {
@@ -268,26 +251,12 @@ const styles = StyleSheet.create({
   },
 
   submit: {
-    flex: 1,
-    padding: 30,
     justifyContent: 'center',
     alignItems: 'center',
-    flexDirection:'column'
+    marginTop: 50,
+    width: 150,
   },
 
-  buttonSubmit:{
-    backgroundColor: '#9C56D3',
-    width: 90,
-    height: 30,
-  },
-
-  textButton:{
-    padding: 5,
-    color: '#fff',
-    justifyContent: 'center',
-    textAlign: 'center',
-    fontFamily: 'KumbhSans_500Medium'
-  },
   loginContainer: {
     flex: 5,
     justifyContent: 'flex-start',

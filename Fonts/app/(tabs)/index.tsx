@@ -1,3 +1,3 @@
-import App from './Telas/telaInicialLogin'
+import App from './Telas/telaLogin'
 
 export default App
