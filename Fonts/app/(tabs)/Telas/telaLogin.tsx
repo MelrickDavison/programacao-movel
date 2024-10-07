@@ -108,6 +108,7 @@ SplashScreen.preventAutoHideAsync();
            onChangeText={setEmail}
            label="Login"
            placeholder="Email ou Usuário"
+           autoCapitalize='none'
         />
   </View>
 

@@ -148,6 +148,7 @@ SplashScreen.preventAutoHideAsync();
         selectTextOnFocus= {true}
         placeholder='Digite seu login'
         placeholderTextColor={"#fff"}
+        autoCapitalize='none'
         selectionColor={'#fff'}
       />
 
