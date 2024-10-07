@@ -105,6 +105,7 @@ SplashScreen.preventAutoHideAsync();
   <View style={{paddingLeft: 12, paddingTop: 20}}>
         <TextInput
            mode="flat"
+           onChangeText={setEmail}
            label="Login"
            placeholder="Email ou Usuário"
         />
@@ -113,6 +114,7 @@ SplashScreen.preventAutoHideAsync();
   <View style={{paddingLeft: 12, paddingTop: 20}}>
       <TextInput
       label="Password"
+      onChangeText={setSenha}
       secureTextEntry={senhaState}
       right={<TextInput.Icon icon={imgSenha} onPress={mudarImg}/>}
     />
