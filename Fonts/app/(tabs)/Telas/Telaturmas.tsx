@@ -119,6 +119,6 @@ const styles = StyleSheet.create({
       containerTurma: {
         justifyContent: 'center',
         alignItems: 'center',
-        paddingTop: 10,
+        paddingTop: 20,
       }
 });
