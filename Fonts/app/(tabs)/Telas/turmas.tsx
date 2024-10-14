@@ -39,7 +39,7 @@ export default function turmas() {
     </View>
       
       <View style={styles.buttonAdd}>
-        <Avatar.Text size={65} label="+" />
+        <Avatar.Text size={65} label="+"/>
       </View>
 
       <Button>
@@ -67,11 +67,8 @@ const styles = StyleSheet.create({
       },
 
       buttonAdd: {
-        flex: 1,
         alignItems: 'flex-end',
         justifyContent: 'flex-end',
         paddingRight: 20,
-        paddingBottom: 20,
-      }
-
+      },
 });
