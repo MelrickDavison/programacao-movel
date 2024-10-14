@@ -52,13 +52,15 @@ if (!loaded && !error) {
       fontSize: 20,
       paddingLeft: 10,
       width: 250,
-      paddingBottom: 10,
+      paddingBottom: 5,
     },
 
     containerSubtitle:{
       flex: 1,
       flexDirection: 'row',
       paddingRight: 20,
+      paddingBottom: 10,
+      alignItems: 'flex-end',
       justifyContent: 'space-between'
     },
 
@@ -68,8 +70,8 @@ if (!loaded && !error) {
     },
 
     icone: {
-      height: 40,
-      width: 40,
+      height: 35,
+      width: 35,
     }
 
   })
