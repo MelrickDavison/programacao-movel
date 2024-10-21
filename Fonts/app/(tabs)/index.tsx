@@ -1,3 +1,3 @@
-import App from './Telas/Telaturmas'
+import App from './Telas/participanteTurmas'
 
 export default App
