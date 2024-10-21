@@ -7,6 +7,7 @@ import { Ubuntu_500Medium } from '@expo-google-fonts/ubuntu';
 import { KumbhSans_500Medium } from '@expo-google-fonts/kumbh-sans';
 import { useState, useEffect} from 'react';
 import  ContainerTurmas  from './turmas'
+import Header from '../../../components/Components/header'
 import * as SplashScreen from 'expo-splash-screen';
 
 export default function turmas() {
@@ -55,10 +56,7 @@ export default function turmas() {
 
     numTurmas === 0 ? 
     <View style={styles.container}>
-      <Appbar.Header style={styles.cabecalho}>
-      <Appbar.BackAction onPress={() => {router.replace('/(tabs)/Telas/telaInicialLogin');}} color={'#fff'}/>
-      <Appbar.Content title={<Text style={{color:'#fff', fontFamily:'Ubuntu_500Medium', fontSize: 25}}>Turmas</Text>} />
-    </Appbar.Header>
+    <Header nome='Turmas'></Header>
 
     <View style={{flex:1, alignItems: 'center', justifyContent: 'center'}}>
     <Text style={{color: '#cccc', fontSize:25, fontFamily: 'KumbhSans_500Medium', textAlign: 'center'}}>Crie sua primeira turma!</Text>
@@ -70,10 +68,7 @@ export default function turmas() {
 
     </View> :  
      <View style={styles.container}>
-     <Appbar.Header style={styles.cabecalho}>
-     <Appbar.BackAction onPress={() => {router.replace('/(tabs)/Telas/telaInicialLogin');}} color={'#fff'}/>
-     <Appbar.Content title={<Text style={{color:'#fff', fontFamily:'Ubuntu_500Medium', fontSize: 25}}>Turmas</Text>} />
-   </Appbar.Header>
+      <Header nome='Turmas'></Header>
 
    <FlatList
     data={turmas}
