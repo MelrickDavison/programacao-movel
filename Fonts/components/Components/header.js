@@ -1,4 +1,4 @@
-import { View, Text, StyleSheet} from 'react-native'
+import { View, Text, StyleSheet, Image} from 'react-native'
 import { Link, useRouter } from 'expo-router';
 import {useFonts} from 'expo-font' 
 import { Button, Appbar, TextInput, Avatar} from 'react-native-paper';
@@ -27,15 +27,34 @@ export default function Header({nome}) {
   return (
     <Appbar.Header style={styles.cabecalho}>
     <Appbar.BackAction onPress={() => {router.replace('/(tabs)/Telas/telaInicialLogin');}} color={'#fff'}/>
-    <Appbar.Content title={<Text style={{color:'#fff', fontFamily:'Ubuntu_500Medium', fontSize: 25}}>{nome}</Text>} />
+    <Appbar.Content title={
+        <View style={styles.containerHeader}>
+          <Text style={{color:'#fff', fontFamily:'Ubuntu_500Medium', fontSize: 25}}>{nome}</Text>
+          <Image style={styles.imageHeader} source={require('../../assets/images/ImagesLogin/logoHeader.png')}/>
+        </View>
+
+    }/>
   </Appbar.Header>
   )
 }
 
 const styles = StyleSheet.create({
+    containerHeader:{
+        flex: 1,
+        flexDirection: 'row',
+        justifyContent: 'space-between',
+        alignItems: 'center'
+    },
     cabecalho:{
         backgroundColor:'transparent',
         borderBottomWidth: 2,
         borderColor: '#67209E'
       },
+
+      imageHeader:{
+        width: 65,
+        height: 30,
+        marginRight: 20,
+        marginTop: 10,
+      }
 })
