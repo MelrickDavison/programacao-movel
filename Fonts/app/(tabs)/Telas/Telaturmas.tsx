@@ -1,12 +1,11 @@
 import { View, Text, StyleSheet, FlatList } from 'react-native'
-import React from 'react'
 import { Button, Appbar, TextInput, Avatar} from 'react-native-paper';
 import { Link, useRouter } from 'expo-router';
 import {useFonts} from 'expo-font' 
 import { Ubuntu_500Medium } from '@expo-google-fonts/ubuntu';
 import { KumbhSans_500Medium } from '@expo-google-fonts/kumbh-sans';
 import { useState, useEffect} from 'react';
-import  ContainerTurmas  from './turmas'
+import  ContainerTurmas  from '../../../components/Components/turmas'
 import Header from '../../../components/Components/header'
 import * as SplashScreen from 'expo-splash-screen';
 
