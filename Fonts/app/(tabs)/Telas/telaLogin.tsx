@@ -4,6 +4,7 @@ import { auth } from '../../../firebaseConfig';
 import { signInWithEmailAndPassword } from "firebase/auth";
 import { LinearGradient } from 'expo-linear-gradient';
 import ButtonLogin from '../../../components//Components/buttonLogin';
+import Header from '../../../components/Components/header'
 import { useState, useEffect} from 'react';
 import { Button, Appbar, TextInput} from 'react-native-paper';
 import { Link, useRouter } from 'expo-router';
@@ -18,9 +19,6 @@ import { Ubuntu_500Medium } from '@expo-google-fonts/ubuntu';
 import { KumbhSans_500Medium } from '@expo-google-fonts/kumbh-sans';
 import { Nunito_700Bold  } from '@expo-google-fonts/nunito'
 import { Raleway_600SemiBold } from '@expo-google-fonts/raleway'
-import { async } from '@firebase/util';
-import { FirebaseApp, FirebaseError} from 'firebase/app';
-
 
 export default function telaLogin() {
   const [email, setEmail] = useState('');
@@ -95,10 +93,7 @@ SplashScreen.preventAutoHideAsync();
       <StatusBar/>
 
         
-    <Appbar.Header style={styles.cabecalho}>
-      <Appbar.BackAction onPress={() => {router.replace('/(tabs)/Telas/telaInicialLogin');}} color={'#fff'}/>
-      <Appbar.Content title={<Text style={{color:'#fff', fontFamily:'Ubuntu_500Medium', fontSize: 25}}>Login</Text>} />
-    </Appbar.Header>
+      <Header nome='Login'></Header>
 
      
 <View style={styles.form}>

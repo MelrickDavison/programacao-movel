@@ -1,10 +1,11 @@
-import { View, Text, StatusBar, StyleSheet, Image, TextInput, SafeAreaView, Pressable, Alert} from 'react-native'
+import { View, Text, StatusBar, StyleSheet, Image, SafeAreaView, Pressable, Alert, ImageBackground} from 'react-native'
 import React from 'react';
-import { Button } from 'react-native-paper';
 import { auth } from '../../../firebaseConfig';
 import { createUserWithEmailAndPassword } from "firebase/auth";
 import { LinearGradient } from 'expo-linear-gradient';
 import ButtonLogin from '../../../components//Components/buttonLogin';
+import Header from '../../../components/Components/header'
+import { Button, TextInput} from 'react-native-paper';
 import { useState, useEffect} from 'react';
 import { Link, useRouter } from 'expo-router';
 //Só vai utilizar uma vez
@@ -18,9 +19,6 @@ import { Ubuntu_500Medium } from '@expo-google-fonts/ubuntu';
 import { KumbhSans_500Medium } from '@expo-google-fonts/kumbh-sans';
 import { Nunito_700Bold  } from '@expo-google-fonts/nunito'
 import { Raleway_600SemiBold } from '@expo-google-fonts/raleway'
-import { async } from '@firebase/util';
-import { FirebaseApp, FirebaseError} from 'firebase/app';
-
 
 export default function telaLogin() {
   const [email, setEmail] = useState('');
@@ -117,80 +115,47 @@ SplashScreen.preventAutoHideAsync();
   return (
     <SafeAreaView style={styles.container}>
       <StatusBar/>
-
-     
         <LinearGradient
           colors={['#1A191A', 'transparent']}
           style={styles.background}
         />
+        <Header nome='Cadastro'></Header>
 
-        <View style={styles.containerTitulo}>
-          <Text style={styles.subtitulo} >Welcome to</Text>
-          <View style={styles.logo}>
-          <Image 
-            style={styles.imagemLogo}
-            source={require('../../../assets/images/telaInicialLogin/logoInstudo.png')}/>
-          <Text style={styles.titulo} >Instudo</Text>
-          </View>
-          <View style={styles.linha}></View>
-      </View>
-        
-       
-
-     
-        <View style={styles.form}>
-
+<ImageBackground source={require('./../../../assets/images/telaInicialLogin/backImage.png')} style={{flex: 1, width: "100%", height: "100%" }}> 
+<View style={styles.form}>
 <View>
-  <Text style={styles.tagForm}>Login:</Text>
+<View style={{paddingLeft: 12, paddingTop: 20}}>
+        <TextInput
+           mode="flat"
+           onChangeText={setEmail}
+           label="Login"
+           placeholder="Email ou Usuário"
+           autoCapitalize='none'
+        />
+  </View>
+  <View style={{paddingLeft: 12, paddingTop: 20}}>
       <TextInput
-        style={styles.input}
-        onChangeText={setEmail}
-        selectTextOnFocus= {true}
-        placeholder='Digite seu login'
-        placeholderTextColor={"#fff"}
-        autoCapitalize='none'
-        selectionColor={'#fff'}
-      />
-
-    <Text style={styles.tagForm}> Definir senha:</Text>
-    <View  style={styles.showPass}>
-     
-    <TextInput
-      style={styles.password}
-      secureTextEntry={senhaState}
+      label="Define Password"
       onChangeText={setSenha}
-      placeholder='Digite sua senha'
-      placeholderTextColor={"#fff"}
-      underlineColorAndroid="transparent"
+      secureTextEntry={senhaState}
+      right={<TextInput.Icon icon={imgSenha} onPress={mudarImg}/>}
     />
-     <Pressable onPress={mudarImg}>
-        <Image style={styles.imgSenha} source={imgSenha}/>
-      </Pressable>
     </View>
 
-    <Text style={styles.tagForm}>Repetir senha:</Text>
-    <View  style={styles.showPass}>
-     
-    <TextInput
-      style={styles.password}
+    <View style={{paddingLeft: 12, paddingTop: 20}}>
+      <TextInput
+      label="Repeat Password"
+      onChangeText={setSenha}
       secureTextEntry={senhaState}
-      onChangeText={setSenhaRepeat}
-      placeholder='Digite sua senha'
-      placeholderTextColor={"#fff"}
-      underlineColorAndroid="transparent"
+      right={<TextInput.Icon icon={imgSenha} onPress={mudarImg}/>}
     />
-     <Pressable onPress={mudarImg}>
-        <Image style={styles.imgSenha} source={imgSenha}/>
-      </Pressable>
     </View>
 </View>
-    <View style={styles.submit}>
-        <Button loading={carregamento} buttonColor={'#67209E'} mode="contained" onPress={handleLogin}>Cadastrar</Button>
 
-    </View>
 
     
     <View style={styles.loginContainer}>
+    <Button loading={carregamento} buttonColor={'#67209E'} mode="contained" onPress={handleLogin} style={styles.submit}>Cadastrar</Button>
       <View style={styles.lableLogin}>
         <Text style={styles.tagLogin}>Entrar com:</Text>
       </View>
@@ -201,6 +166,7 @@ SplashScreen.preventAutoHideAsync();
       <ButtonLogin nome={"Apple"} foto={require('../../../assets/images/ImagesLogin/apple.png')}/>
     </View>
   </View>
+  </ImageBackground>
 
   </SafeAreaView>
    
@@ -243,6 +209,15 @@ const styles = StyleSheet.create({
     textAlign: 'center',
     fontFamily: 'LaBelleAurore_400Regular',
     marginLeft: 5,
+  },
+
+  submit: {
+    justifyContent: 'center',
+    alignItems: 'center',
+    marginTop: 50,
+    marginBottom: 20,
+    height: 'auto',
+    width: 'auto',
   },
 
   campForm:{
@@ -304,13 +279,6 @@ const styles = StyleSheet.create({
     fontFamily: 'Nunito_700Bold'
   },
 
-  submit: {
-    flex: 1,
-    padding: 30,
-    justifyContent: 'center',
-    alignItems: 'center',
-    flexDirection:'column'
-  },
 
   buttonSubmit:{
     backgroundColor: '#9C56D3',
