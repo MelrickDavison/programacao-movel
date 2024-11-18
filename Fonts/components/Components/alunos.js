@@ -1,12 +1,12 @@
 import { View, Text, Image, StyleSheet, Pressable } from 'react-native'
 import { KumbhSans_500Medium } from '@expo-google-fonts/kumbh-sans';
 import { useState, useEffect} from 'react';
+import { Avatar } from 'react-native-paper';
 import {useFonts} from 'expo-font' 
 import * as SplashScreen from 'expo-splash-screen';
  
-export default function ContainerTurmas ({nome, professor, materia, icone}) {
+export default function ContainerAlunos ({nome}) {
   SplashScreen.preventAutoHideAsync();
-
 //Fazer o import de cada fonte
 const [loaded, error] = useFonts({
 KumbhSans_500Medium
@@ -24,29 +24,38 @@ if (!loaded && !error) {
 }
 
   return (
-    <Pressable style={styles.buttonTurma}>
-      <Text style={styles.titulo}>{nome} - {materia}</Text>
-        <View style={styles.containerSubtitle}>      
-          <Text style={styles.subtitle}>Prof.: {professor}</Text>
-          <Image style={styles.icone} source={icone}/>
-        </View>
+    <View style={styles.container}>  
+      <Avatar.Image size={40} source={require('.../../../assets/images/telaAlunos/perfil.png')} />
+      <View style={styles.containerTitle}>
+      <Text style={styles.nome}>{nome}</Text>    
+      </View>
 
-    </Pressable>
+      <Pressable style={styles.buttonAdicionarAlunos}>
+       <Text style={{color: '#fff'}}>+</Text> 
+      </Pressable>
+      </View>
+
   )
 
 
 }
  const styles = StyleSheet.create({
-    buttonTurma: {
-      flex: 1,
-      paddingTop: 10,
-      backgroundColor: '#67209E',
-      justifyContent: 'flex-start',
-      borderRadius: 15,
-      width: '92%'
+    container: {
+        flex: 1,
+        flexDirection: 'row',
+        paddingRight: 20,
+        paddingTop: 15,
+        paddingBottom: 10,
+        alignItems: 'center',
+        justifyContent: 'space-around',
+
     },
 
-    titulo: {
+    containerTitle:{
+      backgroundColor: '#9C56D3',
+    },
+
+    nome: {
       color: '#fff',
       fontFamily: 'KumbhSans_500Medium',
       fontSize: 20,
@@ -55,18 +64,17 @@ if (!loaded && !error) {
       paddingBottom: 5,
     },
 
-    containerSubtitle:{
-      flex: 1,
-      flexDirection: 'row',
-      paddingRight: 20,
-      paddingBottom: 10,
-      alignItems: 'flex-end',
-      justifyContent: 'space-between'
+    buttonAdicionarAlunos:{
+      borderRadius: 100,
+      width: 25,
+      textAlign: 'center',
+      alignItems: 'center',
+      justifyContent: 'center',
+      backgroundColor: '#71BBFF',
     },
 
     subtitle: {
       color: '#fff',
-      width:  100,
       paddingLeft: 10,
     },
 

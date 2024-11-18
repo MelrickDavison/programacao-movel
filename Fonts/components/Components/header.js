@@ -7,7 +7,7 @@ import { useState, useEffect} from 'react';
 import * as SplashScreen from 'expo-splash-screen';
 
 
-export default function Header({nome}) {
+export default function Header({nome, caminho}) {
     SplashScreen.preventAutoHideAsync();
 
     const router = useRouter();
@@ -26,7 +26,7 @@ export default function Header({nome}) {
     
   return (
     <Appbar.Header style={styles.cabecalho}>
-    <Appbar.BackAction onPress={() => {router.replace('/(tabs)/Telas/telaInicialLogin');}} color={'#fff'}/>
+    <Appbar.BackAction onPress={() => {router.replace(caminho)}} color={'#fff'}/>
     <Appbar.Content title={
         <View style={styles.containerHeader}>
           <Text style={{color:'#fff', fontFamily:'Ubuntu_500Medium', fontSize: 25}}>{nome}</Text>

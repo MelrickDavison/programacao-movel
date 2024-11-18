@@ -1,4 +1,4 @@
-import { View, Text, StyleSheet, FlatList } from 'react-native'
+import { View, Text, StyleSheet, FlatList, Pressable } from 'react-native'
 import { Button, Appbar, TextInput, Avatar} from 'react-native-paper';
 import { Link, useRouter } from 'expo-router';
 import {useFonts} from 'expo-font' 
@@ -11,7 +11,7 @@ import * as SplashScreen from 'expo-splash-screen';
 
 export default function turmas() {
     SplashScreen.preventAutoHideAsync();
-
+    const router = useRouter();
     const turmas  = [
       {
         id: 1,
@@ -19,7 +19,7 @@ export default function turmas() {
         materia: 'Química',
         icone: require('../../../assets/images/telaInicialLogin/quimica 1.png'),
         cor: '#',
-        professor: 'Ana Júlia',
+        professor: 'Ana',
         participantes: ['Fabricio']
       },
 
@@ -28,14 +28,12 @@ export default function turmas() {
         nome: '2° ano Médio Integrado',
         materia: 'Matemática ',
         icone: require('../../../assets/images/telaInicialLogin/geometria 1.png'),
-        professor: 'Elinelson',
+        professor: 'Eli',
         participantes: ['Fabricio', 'Gabriel']
       }
     ];
 
     const numTurmas = turmas.length
-
-    const router = useRouter();
     const [loaded, error] = useFonts({
         Ubuntu_500Medium, 
         KumbhSans_500Medium
@@ -50,24 +48,26 @@ export default function turmas() {
       if (!loaded && !error) {
         return null;
       }
-    
+      const mudarPagina = async () => {
+      router.replace('/(tabs)/Telas/participanteTurmas'); 
+    }
   return ( 
 
     numTurmas === 0 ? 
     <View style={styles.container}>
-    <Header nome='Turmas'></Header>
+    <Header nome='Turmas' caminho={'/(tabs)/Telas/telaLogin'}></Header>
 
     <View style={{flex:1, alignItems: 'center', justifyContent: 'center'}}>
     <Text style={{color: '#cccc', fontSize:25, fontFamily: 'KumbhSans_500Medium', textAlign: 'center'}}>Crie sua primeira turma!</Text>
     </View>
  
-      <View style={styles.buttonAdd}>
-        <Avatar.Text size={65} label="+"/>
-      </View>
+      <Pressable style={styles.buttonAdd} onPress={mudarPagina} >
+        <Avatar.Text size={65} label="+" />
+      </Pressable>
 
     </View> :  
      <View style={styles.container}>
-      <Header nome='Turmas'></Header>
+      <Header nome='Turmas' caminho={'/(tabs)/Telas/telaLogin'}></Header>
 
    <FlatList
     data={turmas}
@@ -77,10 +77,9 @@ export default function turmas() {
     </View>
       }
     />
-
-     <View style={styles.buttonAdd}>
-       <Avatar.Text size={65} label="+"/>
-     </View>
+ <Pressable style={styles.buttonAdd} onPress={mudarPagina} >
+        <Avatar.Text size={65} label="+" />
+      </Pressable>
    </View>
 
   )
@@ -106,6 +105,7 @@ const styles = StyleSheet.create({
 
       buttonAdd: {
         alignItems: 'flex-end',
+        borderRadius: 100,
         justifyContent: 'flex-end',
         paddingRight: 20,
       },
