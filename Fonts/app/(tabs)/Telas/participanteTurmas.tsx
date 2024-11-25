@@ -21,7 +21,37 @@ export default function participanteTurmas() {
     },
     {
       nome: "Vander"
-    }
+    },
+    {
+      nome: "Silco"
+    },
+    {
+      nome: "Sevika"
+    },
+    {
+      nome: "Aisha"
+    },
+    {
+      nome: "Jayce"
+    },
+    {
+      nome: "Viktor"
+    },
+    {
+      nome: "Ambessa"
+    },
+    {
+      nome: "Mel"
+    },
+    {
+      nome: "Singed"
+    },
+    {
+      nome: "Caitlyn"
+    },
+    {
+      nome: "Maddie"
+    },
   ]
   const mudarPagina = async () => {
     router.replace('/(tabs)/Telas/Telaturmas'); 

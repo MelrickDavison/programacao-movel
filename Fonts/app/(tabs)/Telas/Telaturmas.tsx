@@ -20,7 +20,7 @@ export default function turmas() {
         icone: require('../../../assets/images/telaInicialLogin/quimica 1.png'),
         cor: '#',
         professor: 'Ana',
-        participantes: ['Fabricio']
+        participantes: ['Fabricio', 'Gabriel', 'Kemylly', 'Ellen', 'Daniel', 'João']
       },
 
       {
@@ -29,7 +29,43 @@ export default function turmas() {
         materia: 'Matemática ',
         icone: require('../../../assets/images/telaInicialLogin/geometria 1.png'),
         professor: 'Eli',
-        participantes: ['Fabricio', 'Gabriel']
+        participantes: ['Fabricio', 'Gabriel', 'Vitor', 'Melrick', 'Polyana', 'Michael']
+      },
+
+      {
+        id: 3,
+        nome: 'PIBIT',
+        materia: 'Matemática ',
+        icone: require('../../../assets/images/telaInicialLogin/geometria 1.png'),
+        professor: 'Edel',
+        participantes: ['Fabricio', 'Gabriel', 'Helysson', 'Augusto', 'Pedrin', 'Pepo']
+      },
+
+      {
+        id: 4,
+        nome: 'PIBIC - Educageo',
+        materia: 'Geografia',
+        icone: require('../../../assets/images/telaInicialLogin/globo 1.png'),
+        professor: 'Clécio',
+        participantes: ['Fabricio', 'Gabriel', 'Helysson', 'Melrick', 'Ana', 'Jorge', 'Frederico', 'Sérgio']
+      },
+
+      {
+        id: 5,
+        nome: 'IFAL - RL 912A',
+        materia: 'Química',
+        icone: require('../../../assets/images/telaInicialLogin/quimica 1.png'),
+        professor: 'Mikael',
+        participantes: ['Fabricio', 'Gabriel', 'Helysson', 'Melrick', 'Ana', 'Matheus', 'Vitória', 'Luiza']
+      },
+
+      {
+        id: 6,
+        nome: 'PIBIC - história',
+        materia: 'História',
+        icone: require('../../../assets/images/telaInicialLogin/historia 1.png'),
+        professor: 'Bruno',
+        participantes: ['Fabricio', 'Gabriel', 'Helysson', 'Melrick', 'Ana', 'Jorge', 'Frederico', 'Sérgio', 'Melrick', 'Vitor', 'Davi']
       }
     ];
 
@@ -115,5 +151,6 @@ const styles = StyleSheet.create({
         justifyContent: 'center',
         alignItems: 'center',
         paddingTop: 20,
+        height: 130
       }
 });
