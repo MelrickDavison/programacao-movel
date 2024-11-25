@@ -49,7 +49,7 @@ export default function turmas() {
         return null;
       }
       const mudarPagina = async () => {
-      router.replace('/(tabs)/Telas/participanteTurmas'); 
+      router.replace('/(tabs)/Telas/criarTurma'); 
     }
   return ( 
 
@@ -108,6 +108,7 @@ const styles = StyleSheet.create({
         borderRadius: 100,
         justifyContent: 'flex-end',
         paddingRight: 20,
+        paddingBottom: 10
       },
     
       containerTurma: {
