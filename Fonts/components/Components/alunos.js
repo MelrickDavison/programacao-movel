@@ -25,7 +25,7 @@ if (!loaded && !error) {
 
   return (
     <View style={styles.container}>  
-      <Avatar.Image size={40} source={require('.../../../assets/images/telaAlunos/perfil.png')} />
+      <Avatar.Image size={40} source={require('../../assets/images/telaAlunos/perfil.png')} />
       <View style={styles.containerTitle}>
       <Text style={styles.nome}>{nome}</Text>    
       </View>

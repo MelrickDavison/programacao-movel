@@ -93,7 +93,7 @@ SplashScreen.preventAutoHideAsync();
       <StatusBar/>
 
         
-      <Header nome='Login'></Header>
+      <Header caminho={'/(tabs)/Telas/telaInicialLogin'} nome='Login'></Header>
 
      
 <View style={styles.form}>

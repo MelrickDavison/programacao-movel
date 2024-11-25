@@ -119,7 +119,7 @@ SplashScreen.preventAutoHideAsync();
           colors={['#1A191A', 'transparent']}
           style={styles.background}
         />
-        <Header nome='Cadastro'></Header>
+        <Header caminho={'/(tabs)/Telas/telaInicialLogin'} nome='Cadastro'></Header>
 
 <ImageBackground source={require('./../../../assets/images/telaInicialLogin/backImage.png')} style={{flex: 1, width: "100%", height: "100%" }}> 
 <View style={styles.form}>

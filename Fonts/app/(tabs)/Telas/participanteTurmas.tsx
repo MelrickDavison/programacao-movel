@@ -29,7 +29,7 @@ export default function participanteTurmas() {
   return (
     <SafeAreaView style ={styles.container}>
   <StatusBar/>  
-  <Header nome='Participantes' caminho={'/(tabs)/Telas/Telaturmas'}></Header>
+  <Header nome='Participantes' caminho={'/(tabs)/Telas/criarTurma'}></Header>
     <View style={styles.buscar}>
     <Searchbar
       placeholder="Search"
