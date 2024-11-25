@@ -4,9 +4,9 @@ import { useState, useEffect} from 'react';
 import {useFonts} from 'expo-font' 
 import * as SplashScreen from 'expo-splash-screen';
  
-export default function ContainerTurmas ({nome, professor, materia, icone}) {
+export default function ContainerTurmas ({nome, professor, materia, icone, cor}) {
   SplashScreen.preventAutoHideAsync();
-
+const styles = stylesFunction(cor)
 //Fazer o import de cada fonte
 const [loaded, error] = useFonts({
 KumbhSans_500Medium
@@ -36,11 +36,11 @@ if (!loaded && !error) {
 
 
 }
- const styles = StyleSheet.create({
+ const stylesFunction = (cor) => StyleSheet.create( {
     buttonTurma: {
       flex: 1,
       paddingTop: 10,
-      backgroundColor: '#67209E',
+      backgroundColor: cor,
       justifyContent: 'flex-start',
       borderRadius: 15,
       width: '92%'

@@ -18,7 +18,7 @@ export default function turmas() {
         nome: '3° ano Médio Integrado',
         materia: 'Química',
         icone: require('../../../assets/images/telaInicialLogin/quimica 1.png'),
-        cor: '#',
+        cor: '#A60000',
         professor: 'Ana',
         participantes: ['Fabricio', 'Gabriel', 'Kemylly', 'Ellen', 'Daniel', 'João']
       },
@@ -28,6 +28,7 @@ export default function turmas() {
         nome: '2° ano Médio Integrado',
         materia: 'Matemática ',
         icone: require('../../../assets/images/telaInicialLogin/geometria 1.png'),
+        cor: '#6700A6',
         professor: 'Eli',
         participantes: ['Fabricio', 'Gabriel', 'Vitor', 'Melrick', 'Polyana', 'Michael']
       },
@@ -37,6 +38,7 @@ export default function turmas() {
         nome: 'PIBIT',
         materia: 'Matemática ',
         icone: require('../../../assets/images/telaInicialLogin/geometria 1.png'),
+        cor: '#1700A6',
         professor: 'Edel',
         participantes: ['Fabricio', 'Gabriel', 'Helysson', 'Augusto', 'Pedrin', 'Pepo']
       },
@@ -46,6 +48,7 @@ export default function turmas() {
         nome: 'PIBIC - Educageo',
         materia: 'Geografia',
         icone: require('../../../assets/images/telaInicialLogin/globo 1.png'),
+        cor: '#A60000',
         professor: 'Clécio',
         participantes: ['Fabricio', 'Gabriel', 'Helysson', 'Melrick', 'Ana', 'Jorge', 'Frederico', 'Sérgio']
       },
@@ -55,6 +58,7 @@ export default function turmas() {
         nome: 'IFAL - RL 912A',
         materia: 'Química',
         icone: require('../../../assets/images/telaInicialLogin/quimica 1.png'),
+        cor: '#1700A6',
         professor: 'Mikael',
         participantes: ['Fabricio', 'Gabriel', 'Helysson', 'Melrick', 'Ana', 'Matheus', 'Vitória', 'Luiza']
       },
@@ -64,6 +68,7 @@ export default function turmas() {
         nome: 'PIBIC - história',
         materia: 'História',
         icone: require('../../../assets/images/telaInicialLogin/historia 1.png'),
+        cor: '#6700A6',
         professor: 'Bruno',
         participantes: ['Fabricio', 'Gabriel', 'Helysson', 'Melrick', 'Ana', 'Jorge', 'Frederico', 'Sérgio', 'Melrick', 'Vitor', 'Davi']
       }
@@ -109,7 +114,7 @@ export default function turmas() {
     data={turmas}
     renderItem={({item}) =>  
     <View style={styles.containerTurma}>
-      <ContainerTurmas nome={item.nome} professor={item.professor} materia={item.materia} icone={item.icone}/>
+      <ContainerTurmas nome={item.nome} professor={item.professor} materia={item.materia} icone={item.icone} cor={item.cor}/>
     </View>
       }
     />
