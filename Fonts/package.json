@@ -55,5 +55,13 @@
     "react-test-renderer": "18.2.0",
     "typescript": "~5.3.3"
   },
-  "private": true
+  "private": true,
+
+  "expo": {
+    "doctor": {
+      "reactNativeDirectoryCheck": {
+        "exclude": ["firebase", "@expo-google-fonts/inter", "@expo-google-fonts/kumbh-sans", "@expo-google-fonts/la-belle-aurore", "@expo-google-fonts/nunito", "@expo-google-fonts/raleway", "@expo-google-fonts/ubuntu"]
+      }
+    }
+  }
 }
