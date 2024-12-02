@@ -61,7 +61,7 @@ export default function participanteTurmas() {
 }
 const styles = StyleSheet.create({
   container: {
-    flex:1,
+    flex: 1,
     backgroundColor : "#1a191a",
     paddingTop: 30,
   },
@@ -72,7 +72,8 @@ const styles = StyleSheet.create({
   },
 
   input:{
-    width: '80%',
+    width: 270,
+    color: '#fff',
   },
 
   containerAlunos:{
