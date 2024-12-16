@@ -8,71 +8,85 @@ import { useState, useEffect} from 'react';
 import  ContainerTurmas  from '../../../components/Components/turmas'
 import Header from '../../../components/Components/header'
 import * as SplashScreen from 'expo-splash-screen';
+import { collection, getDocs, QuerySnapshot, DocumentData, addDoc, serverTimestamp, doc, deleteDoc } from 'firebase/firestore'
+import { db } from '../../../firebaseConfig';
 
 export default function turmas() {
     SplashScreen.preventAutoHideAsync();
     const router = useRouter();
-    const turmas  = [
-      {
-        id: 1,
-        nome: '3° ano Médio Integrado',
-        materia: 'Química',
-        icone: require('../../../assets/images/telaInicialLogin/quimica 1.png'),
-        cor: '#A60000',
-        professor: 'Ana',
-        participantes: ['Fabricio', 'Gabriel', 'Kemylly', 'Ellen', 'Daniel', 'João']
-      },
+    const collectionRef = collection(db, 'turmas');
+    type Turma = {
+      id: string;
+      nome: string;
+      materia: string;
+      icone: any;
+      cor: string;
+      professor: string;
+      participantes: string[];
+    };
 
-      {
-        id: 2,
-        nome: '2° ano Médio Integrado',
-        materia: 'Matemática ',
-        icone: require('../../../assets/images/telaInicialLogin/geometria 1.png'),
-        cor: '#6700A6',
-        professor: 'Eli',
-        participantes: ['Fabricio', 'Gabriel', 'Vitor', 'Melrick', 'Polyana', 'Michael']
-      },
+    const [turmas, setTurmas] = useState<Turma[]>([]);;
+    // const turma  = [
+    //   {
+    //     id: 1,
+    //     nome: '3° ano Médio Integrado',
+    //     materia: 'Química',
+    //     icone: require('../../../assets/images/telaInicialLogin/quimica 1.png'),
+    //     cor: '#A60000',
+    //     professor: 'Ana',
+    //     participantes: ['Fabricio', 'Gabriel', 'Kemylly', 'Ellen', 'Daniel', 'João']
+    //   },
 
-      {
-        id: 3,
-        nome: 'PIBIT',
-        materia: 'Matemática ',
-        icone: require('../../../assets/images/telaInicialLogin/geometria 1.png'),
-        cor: '#1700A6',
-        professor: 'Edel',
-        participantes: ['Fabricio', 'Gabriel', 'Helysson', 'Augusto', 'Pedrin', 'Pepo']
-      },
+    //   {
+    //     id: 2,
+    //     nome: '2° ano Médio Integrado',
+    //     materia: 'Matemática ',
+    //     icone: require('../../../assets/images/telaInicialLogin/geometria 1.png'),
+    //     cor: '#6700A6',
+    //     professor: 'Eli',
+    //     participantes: ['Fabricio', 'Gabriel', 'Vitor', 'Melrick', 'Polyana', 'Michael']
+    //   },
 
-      {
-        id: 4,
-        nome: 'PIBIC - Educageo',
-        materia: 'Geografia',
-        icone: require('../../../assets/images/telaInicialLogin/globo 1.png'),
-        cor: '#A60000',
-        professor: 'Clécio',
-        participantes: ['Fabricio', 'Gabriel', 'Helysson', 'Melrick', 'Ana', 'Jorge', 'Frederico', 'Sérgio']
-      },
+    //   {
+    //     id: 3,
+    //     nome: 'PIBIT',
+    //     materia: 'Matemática ',
+    //     icone: require('../../../assets/images/telaInicialLogin/geometria 1.png'),
+    //     cor: '#1700A6',
+    //     professor: 'Edel',
+    //     participantes: ['Fabricio', 'Gabriel', 'Helysson', 'Augusto', 'Pedrin', 'Pepo']
+    //   },
 
-      {
-        id: 5,
-        nome: 'IFAL - RL 912A',
-        materia: 'Química',
-        icone: require('../../../assets/images/telaInicialLogin/quimica 1.png'),
-        cor: '#1700A6',
-        professor: 'Mikael',
-        participantes: ['Fabricio', 'Gabriel', 'Helysson', 'Melrick', 'Ana', 'Matheus', 'Vitória', 'Luiza']
-      },
+    //   {
+    //     id: 4,
+    //     nome: 'PIBIC - Educageo',
+    //     materia: 'Geografia',
+    //     icone: require('../../../assets/images/telaInicialLogin/globo 1.png'),
+    //     cor: '#A60000',
+    //     professor: 'Clécio',
+    //     participantes: ['Fabricio', 'Gabriel', 'Helysson', 'Melrick', 'Ana', 'Jorge', 'Frederico', 'Sérgio']
+    //   },
 
-      {
-        id: 6,
-        nome: 'PIBIC - história',
-        materia: 'História',
-        icone: require('../../../assets/images/telaInicialLogin/historia 1.png'),
-        cor: '#6700A6',
-        professor: 'Bruno',
-        participantes: ['Fabricio', 'Gabriel', 'Helysson', 'Melrick', 'Ana', 'Jorge', 'Frederico', 'Sérgio', 'Melrick', 'Vitor', 'Davi']
-      }
-    ];
+    //   {
+    //     id: 5,
+    //     nome: 'IFAL - RL 912A',
+    //     materia: 'Química',
+    //     icone: require('../../../assets/images/telaInicialLogin/quimica 1.png'),
+    //     cor: '#1700A6',
+    //     professor: 'Mikael',
+    //     participantes: ['Fabricio', 'Gabriel', 'Helysson', 'Melrick', 'Ana', 'Matheus', 'Vitória', 'Luiza']
+    //   },
+
+    //   {
+    //     id: 6,
+    //     nome: 'PIBIC - história',
+    //     materia: 'História',
+    //     icone: require('../../../assets/images/telaInicialLogin/historia 1.png'),
+    //     cor: '#6700A6',
+    //     professor: 'Bruno',
+    //     participantes: ['Fabricio', 'Gabriel', 'Helysson', 'Melrick', 'Ana', 'Jorge', 'Frederico', 'Sérgio', 'Melrick', 'Vitor', 'Davi']
+    //   }
+    // ];
 
     const numTurmas = turmas.length
     const [loaded, error] = useFonts({
@@ -80,11 +94,6 @@ export default function turmas() {
         KumbhSans_500Medium
 
       });
-      useEffect(() => {
-        if (loaded || error) {
-          SplashScreen.hideAsync(); //Se a fonte for carregada ou tiver um erro vai esconder a splash screen
-        }
-      }, [loaded, error]);
     
       if (!loaded && !error) {
         return null;
@@ -92,8 +101,24 @@ export default function turmas() {
       const mudarPagina = async () => {
       router.replace('/(tabs)/Telas/criarTurma'); 
     }
-  return ( 
+    useEffect(() => {
+      const getTurma = async () => {
+        try {
+          const turmasSnapshot: QuerySnapshot<DocumentData> = await getDocs(collectionRef);
+          const turmasData = turmasSnapshot.docs.map((doc, id) => ({
+            ...doc.data(),
+            id: id, // Definindo um ID único para cada turma
+          }));
+          console.log(turmasData)
+          setTurmas(turmasData);
+        } catch (err) {
+          console.error(err);
+        }
+      };
+      getTurma();
+    }, []);
 
+  return ( 
     numTurmas === 0 ? 
     <View style={styles.container}>
     <Header nome='Turmas' caminho={'/(tabs)/Telas/telaLogin'}></Header>
@@ -112,11 +137,18 @@ export default function turmas() {
 
    <FlatList
     data={turmas}
-    renderItem={({item}) =>  
+  renderItem={({item}) =>  (
     <View style={styles.containerTurma}>
-      <ContainerTurmas nome={item.nome} professor={item.professor} materia={item.materia} icone={item.icone} cor={item.cor}/>
-    </View>
-      }
+       <ContainerTurmas
+                nome={item.nome}
+                professor={item.professor}
+                materia={item.materia}
+                icone={item.icone}
+                cor={item.cor}
+              />
+            </View>
+          )}
+          keyExtractor={(item) => item.id.toString()}
     />
  <Pressable style={styles.buttonAdd} onPress={mudarPagina} >
         <Avatar.Text size={65} label="+" />

@@ -6,6 +6,9 @@ import { SafeAreaView } from 'react-native-safe-area-context';
 import { StatusBar } from 'expo-status-bar';
 import  ContainerAlunos  from '../../../components/Components/alunos'
 import Header from '../../../components/Components/header'
+import { collection, addDoc, serverTimestamp, getDocs, doc, deleteDoc } from 'firebase/firestore'
+import { db } from '../../../firebaseConfig';
+
 export default function participanteTurmas() {
   const [searchQuery, setSearchQuery] = useState('')
   const router = useRouter();
