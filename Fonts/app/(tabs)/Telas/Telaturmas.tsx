@@ -98,7 +98,7 @@ export default function turmas() {
       if (!loaded && !error) {
         return null;
       }
-      const mudarPagina = async () => {
+      const mudarPagina = () => {
       router.replace('/(tabs)/Telas/criarTurma'); 
     }
     useEffect(() => {

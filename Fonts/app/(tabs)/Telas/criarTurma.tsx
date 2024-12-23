@@ -4,20 +4,72 @@ import { Button, TextInput } from 'react-native-paper';
 import { useState } from 'react';
 import { SafeAreaView } from 'react-native-safe-area-context';
 import { StatusBar } from 'expo-status-bar';
-import  ContainerAlunos  from '../../../components/Components/alunos'
 import Header from '../../../components/Components/header'
-import { collection, addDoc, serverTimestamp, getDocs, doc, deleteDoc } from 'firebase/firestore'
+import { collection, addDoc, getDocs} from 'firebase/firestore'
 import { db } from '../../../firebaseConfig';
 
 export default function participanteTurmas() {
   const [searchQuery, setSearchQuery] = useState('')
+  const collectionRef = collection(db, 'turmas');
+  const [turma, setTurma] = useState([])
   const router = useRouter();
   const [nomeTurma, setNomeTurma] = useState('')
   const [materia, setMateria] = useState('')
   const [nomeProf, setNomeProf] = useState('')
-  const mudarPagina = async () => {
-    router.replace('/(tabs)/Telas/Telaturmas'); 
+  
+  getDocs(collectionRef).then((turma) => {
+    let todoData = turma.docs.map((doc, id) => ({ ...doc.data(), id: id }))
+    setTurma(todoData)
+    }).catch((err) => {
+      console.log(err);
+    })
+
+let flagCor = 0
+let cor1 = "#A60000"
+let cor2 = "#6700A6"
+
+  const verificarNomeTurma = () => {
+    var flag = true
+    for(let i = 0; i < turma.length; i++){
+      turma[i].nome == nomeTurma ? flag = false : flag = true
+      turma[i].id % 2 == 0 ? flagCor = 1 : flagCor = 2
+    }
+    return flag
   }
+
+const submitTurma = async () => {
+  if(verificarNomeTurma()){
+    if(flagCor == 1){
+    try {
+      await addDoc(collectionRef, {
+        nome: nomeTurma,
+        materia: materia,
+        professor: nomeProf,
+        cor: cor1
+      })
+    } catch (err) {
+      console.log(err);
+    }
+  }
+    else{
+      try {
+        await addDoc(collectionRef, {
+          nome: nomeTurma,
+          materia: materia,
+          professor: nomeProf,
+          cor: cor2
+        })
+      } catch (err) {
+        console.log(err);
+      }
+    router.replace('/(tabs)/Telas/participanteTurmas')
+  }
+  } else{
+    console.log("error")
+  }
+}
+
+
   return (
     <SafeAreaView style ={styles.container}>
   <StatusBar/>  
@@ -55,7 +107,7 @@ export default function participanteTurmas() {
 </View>
 
 <View style={{alignItems: 'center'}}>
-<Button mode="contained" style={{width: "45%"}} onPress={() => { router.replace('/(tabs)/Telas/participanteTurmas')}} >Finalizar</Button>
+<Button mode="contained" style={{width: "45%"}} onPress={submitTurma} >Finalizar</Button>
 </View>
 
   
