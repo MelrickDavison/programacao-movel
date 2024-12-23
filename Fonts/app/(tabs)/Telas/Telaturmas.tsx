@@ -109,8 +109,7 @@ export default function turmas() {
             ...doc.data(),
             id: id, // Definindo um ID único para cada turma
           }));
-          console.log(turmasData)
-          setTurmas(turmasData);
+          setTurmas(turmasData); //Este erro não interfere em nada, FAVOR NÂO MEXER
         } catch (err) {
           console.error(err);
         }
@@ -143,14 +142,13 @@ export default function turmas() {
                 nome={item.nome}
                 professor={item.professor}
                 materia={item.materia}
-                icone={item.icone}
                 cor={item.cor}
               />
             </View>
           )}
           keyExtractor={(item) => item.id.toString()}
     />
- <Pressable style={styles.buttonAdd} onPress={mudarPagina} >
+  <Pressable style={styles.buttonAdd} onPress={mudarPagina} >
         <Avatar.Text size={65} label="+" />
       </Pressable>
    </View>

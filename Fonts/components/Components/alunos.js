@@ -5,7 +5,7 @@ import { Avatar } from 'react-native-paper';
 import {useFonts} from 'expo-font' 
 import * as SplashScreen from 'expo-splash-screen';
  
-export default function ContainerAlunos ({nome}) {
+export default function ContainerAlunos ({nome, array}) {
   SplashScreen.preventAutoHideAsync();
 //Fazer o import de cada fonte
 const [loaded, error] = useFonts({
@@ -30,7 +30,7 @@ if (!loaded && !error) {
       <Text style={styles.nome}>{nome}</Text>    
       </View>
 
-      <Pressable style={styles.buttonAdicionarAlunos}>
+      <Pressable style={styles.buttonAdicionarAlunos} onPress={(item) => { array.push(item)}}>
        <Text style={{color: '#fff'}}>+</Text> 
       </Pressable>
       </View>

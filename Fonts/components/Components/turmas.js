@@ -4,7 +4,7 @@ import { useState, useEffect} from 'react';
 import {useFonts} from 'expo-font' 
 import * as SplashScreen from 'expo-splash-screen';
  
-export default function ContainerTurmas ({nome, professor, materia, icone, cor}) {
+export default function ContainerTurmas ({nome, professor, materia, cor}) {
   SplashScreen.preventAutoHideAsync();
 const styles = stylesFunction(cor)
 //Fazer o import de cada fonte
@@ -12,23 +12,12 @@ const [loaded, error] = useFonts({
 KumbhSans_500Medium
 });
 
-//Controle da Splash Screen
-useEffect(() => {
-  if (loaded || error) {
-    SplashScreen.hideAsync(); //Se a fonte for carregada ou tiver um erro vai esconder a splash screen
-  }
-}, [loaded, error]);
-
-if (!loaded && !error) {
-  return null;
-}
 
   return (
     <Pressable style={styles.buttonTurma}>
       <Text style={styles.titulo}>{nome} - {materia}</Text>
         <View style={styles.containerSubtitle}>      
           <Text style={styles.subtitle}>Prof.: {professor}</Text>
-          <Image style={styles.icone} source={icone}/>
         </View>
 
     </Pressable>
