@@ -1,3 +1,2 @@
-import App from './Telas/criarTurma'
-
+import App from './Telas/Telaturmas'
 export default App

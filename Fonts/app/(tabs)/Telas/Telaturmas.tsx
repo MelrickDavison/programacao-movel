@@ -88,19 +88,6 @@ export default function turmas() {
     //   }
     // ];
 
-    const numTurmas = turmas.length
-    const [loaded, error] = useFonts({
-        Ubuntu_500Medium, 
-        KumbhSans_500Medium
-
-      });
-    
-      if (!loaded && !error) {
-        return null;
-      }
-      const mudarPagina = () => {
-      router.replace('/(tabs)/Telas/criarTurma'); 
-    }
     useEffect(() => {
       const getTurma = async () => {
         try {
@@ -116,6 +103,20 @@ export default function turmas() {
       };
       getTurma();
     }, []);
+    
+    const numTurmas = turmas.length
+    const [loaded, error] = useFonts({
+        Ubuntu_500Medium, 
+        KumbhSans_500Medium
+
+      });
+    
+      if (!loaded && !error) {
+        return null;
+      }
+      const mudarPagina = () => {
+      router.replace('/(tabs)/Telas/criarTurma'); 
+    }
 
   return ( 
     numTurmas === 0 ? 
