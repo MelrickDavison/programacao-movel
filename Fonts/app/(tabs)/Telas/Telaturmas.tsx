@@ -8,7 +8,7 @@ import { useState, useEffect} from 'react';
 import  ContainerTurmas  from '../../../components/Components/turmas'
 import Header from '../../../components/Components/header'
 import * as SplashScreen from 'expo-splash-screen';
-import { collection, getDocs, QuerySnapshot, DocumentData, addDoc, serverTimestamp, doc, deleteDoc } from 'firebase/firestore'
+import { collection, getDocs, QuerySnapshot, DocumentData, updateDoc, addDoc, serverTimestamp, doc, deleteDoc } from 'firebase/firestore'
 import { db } from '../../../firebaseConfig';
 
 export default function turmas() {
@@ -23,6 +23,7 @@ export default function turmas() {
       cor: string;
       professor: string;
       participantes: string[];
+      onEdit: (nomeEdit: string, professorEdit: string) => void;
     };
 
     const [turmas, setTurmas] = useState<Turma[]>([]);;
@@ -87,23 +88,38 @@ export default function turmas() {
     //     participantes: ['Fabricio', 'Gabriel', 'Helysson', 'Melrick', 'Ana', 'Jorge', 'Frederico', 'Sérgio', 'Melrick', 'Vitor', 'Davi']
     //   }
     // ];
-
+    const getTurma = async () => {
+      try {
+        const turmasSnapshot: QuerySnapshot<DocumentData> = await getDocs(collectionRef);
+        const turmasData = turmasSnapshot.docs.map((doc, id) => ({
+          ...doc.data(),
+          id: doc.id, 
+        }));
+        setTurmas(turmasData); //Este erro não interfere em nada, FAVOR NÃO MEXER
+      } catch (err) {
+        console.error(err);
+      }
+    };
+    
     useEffect(() => {
-      const getTurma = async () => {
-        try {
-          const turmasSnapshot: QuerySnapshot<DocumentData> = await getDocs(collectionRef);
-          const turmasData = turmasSnapshot.docs.map((doc, id) => ({
-            ...doc.data(),
-            id: id, // Definindo um ID único para cada turma
-          }));
-          setTurmas(turmasData); //Este erro não interfere em nada, FAVOR NÂO MEXER
-        } catch (err) {
-          console.error(err);
-        }
-      };
+      
       getTurma();
     }, []);
     
+
+  const updateTurma = async (id: string, nomeEdit: string) => {
+    try {
+      const turmaDoc = doc(db, 'turmas', id);
+      await updateDoc(turmaDoc, {
+        nome: nomeEdit, // Substitua pelo valor real do nome editado
+      });
+           // Recarrega as turmas após a edição
+           getTurma(); // Chama novamente a função para buscar as turmas atualizadas
+          } catch (err) {
+            console.error('Erro ao editar turma:', err);
+          }
+        };
+
     const numTurmas = turmas.length
     const [loaded, error] = useFonts({
         Ubuntu_500Medium, 
@@ -140,14 +156,16 @@ export default function turmas() {
   renderItem={({item}) =>  (
     <View style={styles.containerTurma}>
        <ContainerTurmas
+                id={item.id}
                 nome={item.nome}
                 professor={item.professor}
                 materia={item.materia}
                 cor={item.cor}
+                onEdit={(nomeEdit) => updateTurma(item.id, nomeEdit)}
               />
             </View>
           )}
-          keyExtractor={(item) => item.id.toString()}
+          keyExtractor={(item) => item.id}
     />
   <Pressable style={styles.buttonAdd} onPress={mudarPagina} >
         <Avatar.Text size={65} label="+" />

@@ -1,20 +1,52 @@
 import React, { useState } from 'react';
 import { View, Text, StyleSheet, TouchableOpacity, Modal, Pressable } from 'react-native';
-import { IconButton } from 'react-native-paper';
+import { IconButton, TextInput } from 'react-native-paper';
+import { collection, getDocs, updateDoc, doc, deleteDoc} from 'firebase/firestore'
+import { db } from '../../firebaseConfig';
 
-export default function ContainerTurmas({ nome, professor, materia, cor }) {
-  const [visible, setVisible] = useState(false);
+type ContainerTurmasProps = {
+  id: string;
+  nome: string;
+  professor: string;
+  materia: string;
+  cor: string;
+  onEdit: (nomeEdit: string) => void; // Tipando os parâmetros que a função recebe
+};
 
-  const openMenu = () => setVisible(true);
-  const closeMenu = () => setVisible(false);
+export default function ContainerTurmas({   id,
+  nome,
+  professor,
+  materia,
+  cor,
+  onEdit,
+}: ContainerTurmasProps) {
+  const [novoNome, setNovoNome] = React.useState(nome);
+  const [novoProfessor, setNovoProfessor] = React.useState(professor);
 
-  const styles = stylesFunction(cor);
+  const collectionRef = collection(db, 'turmas');
+  const [visibleMenu, setVisibleMenu] = useState(false);
+  const [visibleMenuEdit, setVisibleMenuEdit] = useState(false);
+  const [nomeEdit, setNome] = useState('')
+
+  const openMenu = () => setVisibleMenu(true);
+  const closeMenu = () => setVisibleMenu(false);
+  const openMenuEdit = () => setVisibleMenuEdit(true);
+  const closeMenuEdit = () => setVisibleMenuEdit(false);
+
+
+
+  
+  const handleEdit = async () => {
+    closeMenuEdit();
+    closeMenu();
+    onEdit(nomeEdit)
+  };
 
   return (
     <View style={styles.container}>
       {/* Menu - Modal para exibir opções */}
       <Modal
-        visible={visible}
+        visible={visibleMenu}
         transparent={true}
         animationType="fade"
         onRequestClose={closeMenu}
@@ -22,12 +54,38 @@ export default function ContainerTurmas({ nome, professor, materia, cor }) {
         <View style={styles.modalBackground}>
           <View style={styles.modalContainer}>
             <IconButton icon="close" onPress={closeMenu} />
-            <Pressable onPress={() => { closeMenu(); alert('Editado!'); }}>
+            <Pressable onPress={() => {openMenuEdit()}}>
               <Text style={{ fontFamily: 'KumbhSans_500Medium', fontSize: 20 }}>Editar</Text>
             </Pressable>
             <Pressable onPress={() => { closeMenu(); alert('Editado!'); }}>
               <Text style={{ color: 'red', fontFamily: 'KumbhSans_500Medium', fontSize: 20, paddingTop: 10 }}>Excluir</Text>
             </Pressable>
+          </View>
+        </View>
+      </Modal>
+
+      {/* Modal para editar nome */}
+      <Modal
+        visible={visibleMenuEdit}
+        transparent={true}
+        animationType="fade"
+        onRequestClose={closeMenuEdit}
+      >
+        <View style={styles.modalBackground}>
+          <View style={styles.modalEditContainer}>
+            <IconButton icon="close" onPress={closeMenuEdit} />   
+
+            <TextInput
+            style={styles.inputNome}
+              label="Nome"
+              placeholder="Digite o novo nome aqui"
+              onChangeText={setNome}
+            />
+
+            <Pressable onPress={handleEdit}>
+              <Text style={{ fontFamily: 'KumbhSans_500Medium', fontSize: 20 }}>Editar</Text>
+            </Pressable>
+          
           </View>
         </View>
       </Modal>
@@ -54,13 +112,12 @@ export default function ContainerTurmas({ nome, professor, materia, cor }) {
     </View>
   );
 }
+const styles = StyleSheet.create({
 
-const stylesFunction = (cor) =>
-  StyleSheet.create({
     container: {
       flex: 1,
       paddingTop: 10,
-      backgroundColor: cor,
+      backgroundColor: '#6700A6',
       borderRadius: 15,
       width: '92%',
       height: '100%',
@@ -92,6 +149,13 @@ const stylesFunction = (cor) =>
       alignItems: 'center',
     },
 
+    modalEditContainer:{
+      backgroundColor: 'white',
+      padding: 20,
+      borderRadius: 10,
+      width: 270,
+      alignItems: 'center',
+    },
     containerInfo: {
       flex: 1, 
       justifyContent: 'flex-start', 
@@ -121,4 +185,10 @@ const stylesFunction = (cor) =>
     buttonTurma: {
       padding: 10,
     },
+
+    inputNome:{
+      height: 20,
+      width: 250,
+      paddingBottom: 10,
+    }
   });
