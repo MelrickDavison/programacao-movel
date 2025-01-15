@@ -9,16 +9,16 @@ type ContainerTurmasProps = {
   nome: string;
   professor: string;
   materia: string;
-  cor: string;
-  onEdit: (nomeEdit: string) => void; // Tipando os parâmetros que a função recebe
+  onEdit: (nomeEdit: string) => void;
+  onDelete: () => void;
 };
 
 export default function ContainerTurmas({   id,
   nome,
   professor,
   materia,
-  cor,
   onEdit,
+  onDelete
 }: ContainerTurmasProps) {
   const [novoNome, setNovoNome] = React.useState(nome);
   const [novoProfessor, setNovoProfessor] = React.useState(professor);
@@ -57,7 +57,7 @@ export default function ContainerTurmas({   id,
             <Pressable onPress={() => {openMenuEdit()}}>
               <Text style={{ fontFamily: 'KumbhSans_500Medium', fontSize: 20 }}>Editar</Text>
             </Pressable>
-            <Pressable onPress={() => { closeMenu(); alert('Editado!'); }}>
+            <Pressable onPress={() => { closeMenu();  onDelete(); }}>
               <Text style={{ color: 'red', fontFamily: 'KumbhSans_500Medium', fontSize: 20, paddingTop: 10 }}>Excluir</Text>
             </Pressable>
           </View>

@@ -120,6 +120,16 @@ export default function turmas() {
           }
         };
 
+        const handleDelete = async (id: string) => {
+          try {
+            const turmaDoc = doc(db, 'turmas', id);
+            await deleteDoc(turmaDoc); // Exclui a turma do Firestore
+            getTurma(); // Recarrega a lista de turmas após a exclusão
+          } catch (err) {
+            console.error('Erro ao excluir turma:', err);
+          }
+        };
+
     const numTurmas = turmas.length
     const [loaded, error] = useFonts({
         Ubuntu_500Medium, 
@@ -160,8 +170,8 @@ export default function turmas() {
                 nome={item.nome}
                 professor={item.professor}
                 materia={item.materia}
-                cor={item.cor}
                 onEdit={(nomeEdit) => updateTurma(item.id, nomeEdit)}
+                onDelete={() => handleDelete(item.id)}
               />
             </View>
           )}

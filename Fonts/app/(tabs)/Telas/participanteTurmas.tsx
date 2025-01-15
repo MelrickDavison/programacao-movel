@@ -35,18 +35,18 @@ export default function participanteTurmas() {
 
 const submitTurma = async () => {
 console.log(participantes)
-    // try {
-    //   await addDoc(collectionRef, {
-    //     nome: nome,
-    //     materia: materiaTurma,
-    //     professor: prof,
-    //     cor: '#6700A6',
-    //     participantes: participantes
-    //   })
-    // } catch (err) {
-    //   console.log(err);
-    // }
-    // router.replace('/(tabs)/Telas/Telaturmas')
+    try {
+      await addDoc(collectionRef, {
+        nome: nome,
+        materia: materiaTurma,
+        professor: prof,
+        cor: '#6700A6',
+        participantes: participantes
+      })
+    } catch (err) {
+      console.log(err);
+    }
+    router.replace('/(tabs)/Telas/Telaturmas')
   }
   return (
     <SafeAreaView style ={styles.container}>
