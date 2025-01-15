@@ -184,6 +184,6 @@ const styles = StyleSheet.create({
     inputNome:{
       height: 20,
       width: 250,
-      paddingBottom: 10,
+      marginBottom: 20
     }
   });
