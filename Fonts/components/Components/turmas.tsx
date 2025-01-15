@@ -1,6 +1,6 @@
 import React, { useState } from 'react';
 import { View, Text, StyleSheet, TouchableOpacity, Modal, Pressable } from 'react-native';
-import { IconButton, TextInput } from 'react-native-paper';
+import { IconButton, TextInput, Button} from 'react-native-paper';
 import { collection, getDocs, updateDoc, doc, deleteDoc} from 'firebase/firestore'
 import { db } from '../../firebaseConfig';
 
@@ -26,20 +26,21 @@ export default function ContainerTurmas({   id,
   const collectionRef = collection(db, 'turmas');
   const [visibleMenu, setVisibleMenu] = useState(false);
   const [visibleMenuEdit, setVisibleMenuEdit] = useState(false);
-  const [nomeEdit, setNome] = useState('')
+  const [nomeEdit, setNome] = useState('');
+  const [carregamento, setCarregamento] = useState(false)
 
   const openMenu = () => setVisibleMenu(true);
   const closeMenu = () => setVisibleMenu(false);
   const openMenuEdit = () => setVisibleMenuEdit(true);
   const closeMenuEdit = () => setVisibleMenuEdit(false);
 
-
-
   
   const handleEdit = async () => {
+    setCarregamento(true)
+   await onEdit(nomeEdit)
+    setCarregamento(false)
     closeMenuEdit();
     closeMenu();
-    onEdit(nomeEdit)
   };
 
   return (
@@ -82,10 +83,9 @@ export default function ContainerTurmas({   id,
               onChangeText={setNome}
             />
 
-            <Pressable onPress={handleEdit}>
-              <Text style={{ fontFamily: 'KumbhSans_500Medium', fontSize: 20 }}>Editar</Text>
-            </Pressable>
-          
+<Button loading={carregamento} mode="contained" onPress={ () => {handleEdit(); setCarregamento(true)}}>
+    Editar
+  </Button>
           </View>
         </View>
       </Modal>

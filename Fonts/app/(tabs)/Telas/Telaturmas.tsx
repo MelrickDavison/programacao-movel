@@ -1,5 +1,5 @@
 import { View, Text, StyleSheet, FlatList, Pressable } from 'react-native'
-import { Button, Appbar, TextInput, Avatar} from 'react-native-paper';
+import { Button, Appbar, TextInput, Avatar, ActivityIndicator, MD2Colors} from 'react-native-paper';
 import { Link, useRouter } from 'expo-router';
 import {useFonts} from 'expo-font' 
 import { Ubuntu_500Medium } from '@expo-google-fonts/ubuntu';
@@ -15,6 +15,7 @@ export default function turmas() {
     SplashScreen.preventAutoHideAsync();
     const router = useRouter();
     const collectionRef = collection(db, 'turmas');
+    const [carregamento, setCarregamento] = useState(false)
     type Turma = {
       id: string;
       nome: string;
@@ -90,12 +91,14 @@ export default function turmas() {
     // ];
     const getTurma = async () => {
       try {
+        setCarregamento(true)
         const turmasSnapshot: QuerySnapshot<DocumentData> = await getDocs(collectionRef);
         const turmasData = turmasSnapshot.docs.map((doc, id) => ({
           ...doc.data(),
           id: doc.id, 
         }));
         setTurmas(turmasData); //Este erro não interfere em nada, FAVOR NÃO MEXER
+        setCarregamento(false)
       } catch (err) {
         console.error(err);
       }
@@ -109,6 +112,7 @@ export default function turmas() {
 
   const updateTurma = async (id: string, nomeEdit: string) => {
     try {
+      setCarregamento(true)
       const turmaDoc = doc(db, 'turmas', id);
       await updateDoc(turmaDoc, {
         nome: nomeEdit, // Substitua pelo valor real do nome editado
@@ -118,6 +122,7 @@ export default function turmas() {
           } catch (err) {
             console.error('Erro ao editar turma:', err);
           }
+          setCarregamento(false)
         };
 
         const handleDelete = async (id: string) => {
@@ -147,12 +152,14 @@ export default function turmas() {
   return ( 
     numTurmas === 0 ? 
     <View style={styles.container}>
+    
     <Header nome='Turmas' caminho={'/(tabs)/Telas/telaLogin'}></Header>
 
     <View style={{flex:1, alignItems: 'center', justifyContent: 'center'}}>
+    <ActivityIndicator animating={carregamento} color={'#67209E'} size={'large'} />
     <Text style={{color: '#cccc', fontSize:25, fontFamily: 'KumbhSans_500Medium', textAlign: 'center'}}>Crie sua primeira turma!</Text>
     </View>
- 
+
       <Pressable style={styles.buttonAdd} onPress={mudarPagina} >
         <Avatar.Text size={65} label="+" />
       </Pressable>
@@ -160,7 +167,6 @@ export default function turmas() {
     </View> :  
      <View style={styles.container}>
       <Header nome='Turmas' caminho={'/(tabs)/Telas/telaLogin'}></Header>
-
    <FlatList
     data={turmas}
   renderItem={({item}) =>  (

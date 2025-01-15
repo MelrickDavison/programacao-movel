@@ -12,6 +12,8 @@ const [loaded, error] = useFonts({
 KumbhSans_500Medium
 });
 
+const [styleButton, setStyleButton] = useState('buttonAdicionarAlunos')
+
 //Controle da Splash Screen
 useEffect(() => {
   if (loaded || error) {
@@ -23,6 +25,10 @@ if (!loaded && !error) {
   return null;
 }
 
+function pushAluno(){
+
+}
+
   return (
     <View style={styles.container}>  
       <Avatar.Image size={40} source={require('../../assets/images/telaAlunos/perfil.png')} />
@@ -30,7 +36,7 @@ if (!loaded && !error) {
       <Text style={styles.nome}>{nome}</Text>    
       </View>
 
-      <Pressable style={styles.buttonAdicionarAlunos} onPress={(item) => { array.push(item)}}>
+      <Pressable style={styles.styleButton} onPress={pushAluno()}>
        <Text style={{color: '#fff'}}>+</Text> 
       </Pressable>
       </View>
@@ -71,6 +77,15 @@ if (!loaded && !error) {
       alignItems: 'center',
       justifyContent: 'center',
       backgroundColor: '#71BBFF',
+    },
+
+    buttonAdicionarAlunosSelecionado:{
+      borderRadius: 100,
+      width: 25,
+      textAlign: 'center',
+      alignItems: 'center',
+      justifyContent: 'center',
+      backgroundColor: 'green',
     },
 
     subtitle: {
