@@ -71,7 +71,7 @@ const criarTurma = () => {
 </View>
 
 <View style={{alignItems: 'center'}}>
-<Button mode="contained" style={{width: "45%"}} onPress={criarTurma} >Finalizar</Button>
+<Button mode="contained" style={{width: "45%"}} onPress={criarTurma} >Continuar</Button>
 </View>
 
   

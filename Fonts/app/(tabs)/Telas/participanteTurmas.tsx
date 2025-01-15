@@ -10,10 +10,10 @@ import { collection, getDocs, QuerySnapshot, DocumentData, addDoc, serverTimesta
 import Header from '../../../components/Components/header'
 export default function participanteTurmas() {
   const [searchQuery, setSearchQuery] = useState('');
-  const [participantes, setParticipantes] = useState([]);
+  const [participantes, setParticipantes] = useState<string[]>([]); 
   const {nome, materiaTurma, prof} = useLocalSearchParams()
   const collectionRef = collection(db, 'turmas');
-
+  const [carregamento, setCarregamento] = useState(false)
   const router = useRouter();
   const alunos = [
     {
@@ -29,11 +29,18 @@ export default function participanteTurmas() {
       nome: "Vander"
     }
   ]
-  const mudarPagina = async () => {
-    router.replace('/(tabs)/Telas/Telaturmas'); 
-  }
+  const toggleParticipante = (nome: string) => {
+    setParticipantes((prevParticipantes) => {
+      if (prevParticipantes.includes(nome)) {
+        return prevParticipantes.filter((participante) => participante !== nome); // Remove se já estiver selecionado
+      } else {
+        return [...prevParticipantes, nome]; // Adiciona o aluno à lista de participantes
+      }
+    });
+  };
 
 const submitTurma = async () => {
+  setCarregamento(true)
 console.log(participantes)
     try {
       await addDoc(collectionRef, {
@@ -47,6 +54,7 @@ console.log(participantes)
       console.log(err);
     }
     router.replace('/(tabs)/Telas/Telaturmas')
+    setCarregamento(false)
   }
   return (
     <SafeAreaView style ={styles.container}>
@@ -61,24 +69,37 @@ console.log(participantes)
     </View>
 
     <View>
-    <FlatList
-    data={alunos}
-    renderItem={({item}) =>  
-    <View style={styles.containerAlunos}>
-      <ContainerAlunos nome={item.nome} array={participantes}/>
-    </View>
-    }
-    />
-</View>
+        <FlatList
+          data={alunos.filter((aluno) =>
+            aluno.nome.toLowerCase().includes(searchQuery.toLowerCase())
+          )}
+          renderItem={({ item }) => (
+            <View style={styles.containerAlunos}>
+              <ContainerAlunos
+                nome={item.nome}
+                isSelected={participantes.includes(item.nome)} // Passa se o aluno está selecionado
+                onPress={() => toggleParticipante(item.nome)} // Alterna a seleção
+              />
+            </View>
+          )}
+          keyExtractor={(item) => item.nome} // Usa o nome como chave única
+        />
+      </View>
 
-<View style={{alignItems: 'center'}}>
-<Button mode="contained" style={{width: "45%"}} onPress={ submitTurma } >Finalizar</Button>
-</View>
-
-  
+      <View style={{ alignItems: 'center' }}>
+        <Button
+          mode="contained"
+          loading={carregamento}
+          style={{ width: '45%' }}
+          onPress={submitTurma}
+        >
+          Finalizar
+        </Button>
+      </View>
     </SafeAreaView>
-  )
+  );
 }
+
 const styles = StyleSheet.create({
   container: {
     flex:1,

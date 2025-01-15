@@ -1,8 +1,6 @@
 import React, { useState } from 'react';
 import { View, Text, StyleSheet, TouchableOpacity, Modal, Pressable } from 'react-native';
 import { IconButton, TextInput, Button} from 'react-native-paper';
-import { collection, getDocs, updateDoc, doc, deleteDoc} from 'firebase/firestore'
-import { db } from '../../firebaseConfig';
 
 type ContainerTurmasProps = {
   id: string;
@@ -20,10 +18,7 @@ export default function ContainerTurmas({   id,
   onEdit,
   onDelete
 }: ContainerTurmasProps) {
-  const [novoNome, setNovoNome] = React.useState(nome);
-  const [novoProfessor, setNovoProfessor] = React.useState(professor);
 
-  const collectionRef = collection(db, 'turmas');
   const [visibleMenu, setVisibleMenu] = useState(false);
   const [visibleMenuEdit, setVisibleMenuEdit] = useState(false);
   const [nomeEdit, setNome] = useState('');
