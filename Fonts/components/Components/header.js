@@ -29,8 +29,18 @@ export default function Header({nome, caminho}) {
     <Appbar.BackAction onPress={() => {router.replace(caminho)}} color={'#fff'}/>
     <Appbar.Content title={
         <View style={styles.containerHeader}>
-          <Text style={{color:'#fff', fontFamily:'Ubuntu_500Medium', fontSize: 25}}>{nome}</Text>
-          <Image style={styles.imageHeader} source={require('../../assets/images/ImagesLogin/logoHeader.png')}/>
+          <Text 
+          style={
+            {
+              color:'#fff', 
+              fontFamily:'Ubuntu_500Medium', 
+              fontSize: 25
+            }
+              }>{nome}</Text>
+          <Image 
+          style={styles.imageHeader} 
+          source={require('../../assets/images/ImagesLogin/logoHeader.png')}
+          />
         </View>
 
     }/>

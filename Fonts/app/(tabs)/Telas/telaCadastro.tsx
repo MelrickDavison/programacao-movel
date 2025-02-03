@@ -64,12 +64,12 @@ SplashScreen.preventAutoHideAsync();
 
     const handleLogin = async () => {
       try {
-        if(senha === senhaRepeat){
+        if(senha == senhaRepeat){
             setCarregamento(true)
             const userCredential = await createUserWithEmailAndPassword(auth, email, senha);
             const user = userCredential.user;
             console.log(user);
-            router.replace('/(tabs)/Telas/home'); 
+            router.replace('/(tabs)/Telas/Telaturmas'); 
          
         }else{
             throw new Error('Senhas não coincidem')
@@ -119,7 +119,7 @@ SplashScreen.preventAutoHideAsync();
           colors={['#1A191A', 'transparent']}
           style={styles.background}
         />
-        <Header caminho={'/(tabs)/Telas/telaInicialLogin'} nome='Cadastro'></Header>
+<Header caminho={'/(tabs)/Telas/telaInicialLogin'} nome='Cadastro'></Header>
 
 <ImageBackground source={require('./../../../assets/images/telaInicialLogin/backImage.png')} style={{flex: 1, width: "100%", height: "100%" }}> 
 <View style={styles.form}>
@@ -137,6 +137,7 @@ SplashScreen.preventAutoHideAsync();
       <TextInput
       label="Define Password"
       onChangeText={setSenha}
+      autoCapitalize='none'
       secureTextEntry={senhaState}
       right={<TextInput.Icon icon={imgSenha} onPress={mudarImg}/>}
     />
@@ -145,7 +146,8 @@ SplashScreen.preventAutoHideAsync();
     <View style={{paddingLeft: 12, paddingTop: 20}}>
       <TextInput
       label="Repeat Password"
-      onChangeText={setSenha}
+      onChangeText={setSenhaRepeat}
+      autoCapitalize='none'
       secureTextEntry={senhaState}
       right={<TextInput.Icon icon={imgSenha} onPress={mudarImg}/>}
     />

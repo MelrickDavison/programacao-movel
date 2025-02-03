@@ -157,7 +157,12 @@ export default function turmas() {
 
     <View style={{flex:1, alignItems: 'center', justifyContent: 'center'}}>
     <ActivityIndicator animating={carregamento} color={'#67209E'} size={'large'} />
-    <Text style={{color: '#cccc', fontSize:25, fontFamily: 'KumbhSans_500Medium', textAlign: 'center'}}>Crie sua primeira turma!</Text>
+    <Text style={
+      {color: '#cccc', 
+      fontSize:25, 
+      fontFamily: 'KumbhSans_500Medium', 
+      textAlign: 'center'}}
+      >Crie sua primeira turma!</Text>
     </View>
 
       <Pressable style={styles.buttonAdd} onPress={mudarPagina} >

@@ -66,7 +66,7 @@ SplashScreen.preventAutoHideAsync();
         const userCredential = await signInWithEmailAndPassword(auth, email, senha);
         const user = userCredential.user;
         console.log(user);
-        router.replace('/(tabs)/Telas/home');
+        router.replace('/(tabs)/Telas/Telaturmas');
 
       } catch (error : any) {
       if(error.code == 'auth/invalid-email'){
@@ -93,7 +93,7 @@ SplashScreen.preventAutoHideAsync();
       <StatusBar/>
 
         
-      <Header caminho={'/(tabs)/Telas/telaInicialLogin'} nome='Login'></Header>
+<Header caminho={'/(tabs)/Telas/telaInicialLogin'} nome='Login'></Header>
 
      
 <View style={styles.form}>
@@ -105,11 +105,13 @@ SplashScreen.preventAutoHideAsync();
            placeholder="Email ou Usuário"
            autoCapitalize='none'
         />
+        
   </View>
 
   <View style={{paddingLeft: 12, paddingTop: 20}}>
       <TextInput
       label="Password"
+      autoCapitalize='none'
       onChangeText={setSenha}
       secureTextEntry={senhaState}
       right={<TextInput.Icon icon={imgSenha} onPress={mudarImg}/>}

@@ -40,7 +40,7 @@ export default function ContainerTurmas({   id,
 
   return (
     <View style={styles.container}>
-      {/* Menu - Modal para exibir opções */}
+      {/* Menu - exibir opções */}
       <Modal
         visible={visibleMenu}
         transparent={true}
@@ -54,7 +54,11 @@ export default function ContainerTurmas({   id,
               <Text style={{ fontFamily: 'KumbhSans_500Medium', fontSize: 20 }}>Editar</Text>
             </Pressable>
             <Pressable onPress={() => { closeMenu();  onDelete(); }}>
-              <Text style={{ color: 'red', fontFamily: 'KumbhSans_500Medium', fontSize: 20, paddingTop: 10 }}>Excluir</Text>
+              <Text style={{ 
+                color: 'red', 
+                fontFamily: 'KumbhSans_500Medium', 
+                fontSize: 20, 
+                paddingTop: 10 }}>Excluir</Text>
             </Pressable>
           </View>
         </View>
